@@ -24,7 +24,7 @@
     {%- assign deg = angles[i] | strip -%}
     {%- assign z = z_indexes[i] | strip -%}
     
-    <div class="absolute rounded-lg shadow-2xl border-[4px] border-[#C5A059] overflow-hidden reveal pointer-events-auto"
+    <div class="absolute rounded-lg shadow-2xl overflow-hidden reveal pointer-events-auto {% if i < 4 %}border-[4px] border-[#C5A059]{% else %}border-[2px] border-[#C5A059]/50{% endif %}"
          style="
            {% if top != blank %}top: {{ top }};{% endif %}
            {% if bottom != blank %}bottom: {{ bottom }};{% endif %}
@@ -34,7 +34,7 @@
            height: {{ height }}; 
            transform: rotate({{ deg }});
            z-index: {{ z }};
-           {% if i >= 4 %}opacity: 0.6;{% endif %}
+           {% if i >= 4 %}opacity: 0.6; filter: blur(1px);{% endif %}
          ">
       <img src="{{ product.featured_image | image_url: width: 600 }}" 
            alt="{{ product.title | escape }}"

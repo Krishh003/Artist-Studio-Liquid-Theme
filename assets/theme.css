@@ -7,29 +7,30 @@
   --background-dark: #0E120E;
   --background-accent: #31544E;
   --text-light: #FDFCFB;
-  --text-slate-900: #0f172a;
-  --text-muted: #64748b;
-  --gold: #C5A059;
+  --text-muted: #5F5F5F;
+  --gold-primary: #C5A059;
+  --gold-dark: #8E6F3E;
 
   --font-inter: "Inter", sans-serif;
   --font-serif: "Della Respira", serif;
   --font-cursive: "Mr De Haviland", cursive;
-
-  --spacing-p-4: 1rem;
-  --spacing-p-6: 1.5rem;
-  --spacing-p-8: 2rem;
-  --spacing-p-10: 2.5rem;
-  --spacing-p-12: 3rem;
-  --spacing-p-16: 4rem;
-  --spacing-p-24: 6rem;
 }
 
 .dark {
-  --background-light: #0E120E;
-  --background-light-accent: #1B3B36;
-  --text-slate-900: #FDFCFB;
-  --text-muted: #94a3b8;
+  --background-dark: #0E120E;
+  --background-accent: #1B3B36;
+  --text-light: #FDFCFB;
+  --text-muted: #E5E4D7;
 }
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.bg-background-light\/90 { background-color: rgba(253, 252, 251, 0.9); }
+.dark .bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
+.border-primary\/20 { border-color: rgba(49, 84, 78, 0.2); }
 
 /* Base Reset */
 * {
@@ -184,6 +185,16 @@ body {
 }
 .dark #site-header.scrolled {
   background-color: var(--background-dark);
+}
+
+/* Infinite vertical carousel scroll animation */
+@keyframes carousel-scroll-vertical {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(calc(-100% / 3)); }
+}
+
+.animate-carousel-vertical {
+  animation: carousel-scroll-vertical linear infinite;
 }
 
 .reveal {
