@@ -1,0 +1,31 @@
+{% comment %}
+  Parameters:
+    - product: The product object for the artwork
+{% endcomment %}
+
+<div class="artwork-card group relative cursor-pointer overflow-hidden reveal"
+     data-artwork-id="{{ product.id }}"
+     data-image="{{ product.featured_image | image_url: width: 1200 }}"
+     data-title="{{ product.title | escape }}"
+     data-price="{{ product.price | money }}"
+     data-description="{{ product.description | strip_html | truncatewords: 50 | escape }}">
+  
+  <div class="aspect-square relative overflow-hidden bg-gray-100 mb-4 h-[400px]">
+    <img src="{{ product.featured_image | image_url: width: 800 }}" 
+         alt="{{ product.title | escape }}"
+         class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+         loading="lazy">
+    
+    <!-- Hover Overlay -->
+    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+      <span class="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs">
+        View Details
+      </span>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <h4 class="text-lg mb-1">{{ product.title }}</h4>
+    <p class="text-gold font-mono">{{ product.price | money }}</p>
+  </div>
+</div>

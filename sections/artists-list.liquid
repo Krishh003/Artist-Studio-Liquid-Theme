@@ -1,0 +1,49 @@
+{%- liquid
+  assign artists = shop.metaobjects['artist']
+-%}
+
+<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">
+  
+  <div class="container relative z-10">
+    
+    <div class="max-w-4xl mx-auto flex flex-col items-center text-center mb-32">
+      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
+        The Resident Collective
+      </span>
+      <h1 class="text-5xl md:text-8xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
+        Soulful & Surreal Artists
+      </h1>
+      <p class="text-white/40 text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-stagger-2">
+        Browse our growing family of creators, from digital pioneers to traditional masters.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1 px-4 md:px-0">
+      {% for artist_handle in artists %}
+        {% assign artist = artists[artist_handle] %}
+        {% if artist.handle != 'pf-artist' %}
+          {% render 'artist-card', artist: artist, index: forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <!-- Background Text -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-12 opacity-5 pointer-events-none reveal">
+    <span class="text-9xl text-white font-serif whitespace-nowrap">CREATIVE COLLECTIVE</span>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Artists List",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artists Grid"
+    }
+  ]
+}
+{% endschema %}

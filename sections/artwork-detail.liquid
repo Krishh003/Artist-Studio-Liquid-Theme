@@ -1,0 +1,86 @@
+{%- liquid
+  assign product = product
+-%}
+
+<section class="bg-black relative min-h-screen pt-32 pb-48 flex items-center justify-center">
+  
+  <div class="container grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 h-full">
+    
+    <!-- Left: Image side (60% visually on desktop) -->
+    <div class="w-full h-[60vh] md:h-full flex items-center justify-center p-4">
+      <div class="image-zoom-container relative w-full h-full max-w-4xl flex items-center justify-center overflow-hidden bg-white/5 rounded-sm shadow-2xl">
+         <img id="artwork-hero-img" 
+              src="{{ product.featured_image | image_url: width: 1600 }}" 
+              alt="{{ product.title | escape }}"
+              class="zoom-target w-full h-full object-contain transition-transform duration-700 ease-out"
+              data-colorthief-target
+              loading="eager">
+      </div>
+    </div>
+
+    <!-- Right: Content side (40% visually on desktop) -->
+    <div class="w-full flex flex-col justify-center p-8 md:p-16 text-white">
+      
+      <div class="flex items-center gap-6 mb-8 reveal reveal-stagger-1 text-gold uppercase tracking-[0.3em] text-xs">
+         <span>Artwork Profile</span>
+         <div class="h-[1px] w-12 bg-gold/30"></div>
+         <span>Available</span>
+      </div>
+
+      <h1 class="text-4xl md:text-7xl mb-8 leading-tight reveal reveal-stagger-2">
+         {{ product.title }}
+      </h1>
+
+      <div class="h-px w-24 bg-gold mb-12 dynamic-accent-bg reveal reveal-stagger-3"></div>
+
+      <div class="grid grid-cols-2 gap-x-12 gap-y-8 mb-16 reveal reveal-stagger-4">
+         <div class="flex flex-col gap-2">
+            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">Price</span>
+            <span class="text-2xl font-mono text-white">{{ product.price | money }}</span>
+         </div>
+         <div class="flex flex-col gap-2">
+            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">Format</span>
+            <span class="text-2xl text-white font-serif">{{ product.type | default: "Digital Original" }}</span>
+         </div>
+         <div class="flex flex-col gap-2">
+            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">SKU</span>
+            <span class="text-2xl text-white font-serif">{{ product.variants.first.sku | default: "NF-0" | slice: -4, 4 }}</span>
+         </div>
+      </div>
+
+      <div class="prose prose-invert text-white/50 leading-relaxed font-serif text-xl md:text-2xl mb-16 reveal reveal-stagger-5">
+         {{ product.description }}
+      </div>
+      
+      <div class="flex flex-col md:flex-row gap-6 reveal reveal-stagger-6">
+        <button class="bg-gold text-black px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors dynamic-accent-bg"
+                data-inquiry-button
+                data-title="{{ product.title | escape }}"
+                data-artist="{{ product.vendor | default: 'Pristine Artist' }}">
+          Inquire Now
+        </button>
+        {% if product.available %}
+           <form action="/cart/add" method="post" class="flex-grow">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="w-full border border-white/20 text-white px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white/10 transition-colors backdrop-blur-sm">
+                Add to Collection
+              </button>
+           </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Artwork Detail",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artwork Hero Detail"
+    }
+  ]
+}
+{% endschema %}

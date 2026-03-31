@@ -1,0 +1,91 @@
+<footer class="bg-black/90 border-t border-white/5 py-24 relative overflow-hidden">
+  <!-- Small background logo -->
+  <div class="absolute -bottom-10 -right-10 opacity-5 pointer-events-none">
+    <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor">
+       <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+    </svg>
+  </div>
+
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32">
+      
+      <!-- Brand Column -->
+      <div class="flex flex-col gap-8">
+        <div class="flex items-center gap-4">
+           <div class="w-12 h-12 border border-gold flex items-center justify-center p-2">
+             <svg viewBox="0 0 24 24" class="w-full h-full text-gold" fill="currentColor">
+                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+             </svg>
+           </div>
+           <div class="flex flex-col">
+             <span class="text-2xl tracking-tighter text-white font-serif uppercase leading-none">Pristine</span>
+             <span class="text-xs text-gold uppercase tracking-[0.3em] font-sans leading-none">Forests</span>
+           </div>
+        </div>
+        <p class="text-white/40 text-sm leading-relaxed max-w-sm">
+           A digital stage for the soulful and the surreal. curated art from the heart of the forest.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="text-white/40 hover:text-gold transition-colors">Instagram</a>
+          <a href="#" class="text-white/40 hover:text-gold transition-colors">X (Twitter)</a>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="grid grid-cols-2 gap-8">
+         <div class="flex flex-col gap-6">
+           <span class="text-xs uppercase tracking-widest text-gold mb-2">Explore</span>
+           <a href="/pages/artists" class="text-sm text-white/60 hover:text-white transition-colors">Artists</a>
+           <a href="/collections/all" class="text-sm text-white/60 hover:text-white transition-colors">Shop All</a>
+           <a href="/pages/collaboration" class="text-sm text-white/60 hover:text-white transition-colors">Collaborate</a>
+         </div>
+         <div class="flex flex-col gap-6">
+           <span class="text-xs uppercase tracking-widest text-gold mb-2">Legal</span>
+           <a href="/pages/terms" class="text-sm text-white/60 hover:text-white transition-colors">Terms</a>
+           <a href="/pages/privacy" class="text-sm text-white/60 hover:text-white transition-colors">Privacy</a>
+           <a href="/admin" class="text-sm text-white/60 hover:text-white transition-colors">Shopify Admin</a>
+         </div>
+      </div>
+
+      <!-- Newsletter Column -->
+      <div class="flex flex-col gap-8">
+        <span class="text-xs uppercase tracking-widest text-gold">The Studio Digest</span>
+        <p class="text-white/60 text-sm leading-relaxed">
+           Stay updated with our latest artist features & gallery releases.
+        </p>
+        <form class="flex gap-2">
+          <input type="email" placeholder="Email Address" 
+                 class="bg-white/5 border border-white/10 px-4 py-3 text-sm text-white focus:border-gold outline-none flex-grow">
+          <button type="submit" class="bg-gold text-black px-6 py-3 uppercase tracking-widest text-xs font-semibold hover:bg-white transition-colors">
+            Join
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-white/20 text-xs">
+        &copy; {{ 'now' | date: "%Y" }} Pristine Forests. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4 grayscale opacity-40">
+         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa.svg" width="30" height="20" alt="Visa">
+         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/mastercard.svg" width="30" height="20" alt="Mastercard">
+         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/american_express.svg" width="30" height="20" alt="Amex">
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Default Footer"
+    }
+  ]
+}
+{% endschema %}

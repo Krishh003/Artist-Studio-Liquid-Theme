@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "home_hero": {
+      "type": "home-hero",
+      "settings": {
+        "hero_collection": "all"
+      }
+    },
+    "featured_artist": {
+      "type": "home-featured-artist",
+      "settings": {}
+    },
+    "collaboration": {
+      "type": "home-collaboration",
+      "settings": {}
+    }
+  },
+  "order": [
+    "home_hero",
+    "featured_artist",
+    "collaboration"
+  ]
+}

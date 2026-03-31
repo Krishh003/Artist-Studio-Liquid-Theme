@@ -1,0 +1,84 @@
+{
+  "general": {
+    "site_name": "Pristine Forests",
+    "site_description": "An experimental platform dedicated to the intersection of art and beauty."
+  },
+  "navigation": {
+    "artists": "Artists",
+    "login": "Login / Sign Up",
+    "logout": "Logout",
+    "toggle_menu": "Toggle menu",
+    "toggle_theme": "Toggle theme"
+  },
+  "home": {
+    "hero_title": "Artist Studio by Pristine Forests",
+    "hero_description": "An initiative by Pristine Forests where art meets conscious living.",
+    "hero_cta": "Explore Gallery",
+    "featured_artist_heading": "Featured Artist",
+    "explore_art": "Explore His Art",
+    "carousel_empty": "Collection coming soon"
+  },
+  "collaboration": {
+    "heading": "Collaboration",
+    "what_heading": "What is Artist Studio?",
+    "why_heading": "Why We Do It",
+    "extra_heading": "And There's Something Extra",
+    "discount_prefix": "Use code",
+    "discount_suffix": "at checkout"
+  },
+  "artists": {
+    "page_title": "Collaborating Artists",
+    "page_description": "Meet the artists shaping the Pristine Forests universe.",
+    "view_portfolio": "View Portfolio"
+  },
+  "artwork": {
+    "back_to_gallery": "Back to Gallery",
+    "year_label": "Year",
+    "medium_label": "Medium",
+    "dimensions_label": "Dimensions",
+    "price_label": "Price",
+    "price_on_request": "Price on Request",
+    "inquire": "Inquire About Artwork",
+    "selected_works": "Selected Works",
+    "explore_subject": "Explore Subject"
+  },
+  "modal": {
+    "viewing_piece": "Viewing Piece",
+    "artist_narration": "Artist Narration",
+    "immersive_active": "Immersive Mode Active",
+    "inquire_details": "Inquire Details",
+    "close": "Close"
+  },
+  "audio": {
+    "play": "Play ambient audio",
+    "mute": "Mute ambient audio"
+  },
+  "footer": {
+    "tagline": "An experimental platform dedicated to the intersection of art and beauty.",
+    "platform_heading": "Platform",
+    "company_heading": "Company",
+    "newsletter_heading": "Newsletter",
+    "newsletter_description": "Subscribe for art drops.",
+    "newsletter_placeholder": "Email Address",
+    "newsletter_button": "Join",
+    "artist_directory": "Artist Directory",
+    "admin_login": "Admin Login",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2026 Pristine Forests. All rights reserved.",
+    "facebook_label": "Facebook",
+    "email_label": "Email",
+    "share_label": "Share"
+  },
+  "scroll": {
+    "indicator": "Scroll"
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "close": "Close",
+    "refresh_page": "Refresh page",
+    "link_messages": {
+      "new_window": "Opens in a new window"
+    }
+  }
+}

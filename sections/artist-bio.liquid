@@ -1,0 +1,92 @@
+{%- liquid
+  assign artist = metaobject
+-%}
+
+<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden">
+  
+  <div class="container flex flex-col md:flex-row gap-16 md:gap-32">
+    
+    <!-- Left: Portrait (Sticky) -->
+    <div class="w-full md:w-1/3 flex flex-col">
+       <div class="sticky top-40 aspect-[4/5] bg-gray-900 overflow-hidden rounded-sm group reveal">
+          {% if artist.profile_image != blank %}
+            {{ artist.profile_image.value | image_url: width: 800 | image_tag: 
+               class: 'w-full h-full object-cover transition-all duration-1000 group-hover:scale-105',
+               loading: 'lazy'
+            }}
+          {% else %}
+             <div class="w-full h-full bg-white/5 flex items-center justify-center">
+                <span class="text-white/20 uppercase tracking-widest text-xs">Portrait Pending</span>
+             </div>
+          {% endif %}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+       </div>
+
+       <!-- Artist signature under image -->
+       {% if artist.name != blank %}
+        <div class="mt-8 text-center md:text-right reveal reveal-stagger-1">
+           <span class="text-4xl md:text-6xl text-gold/30 font-signature whitespace-nowrap">
+             {{ artist.name.value }}
+           </span>
+        </div>
+       {% endif %}
+    </div>
+
+    <!-- Right: Stats & Bio -->
+    <div class="w-full md:w-2/3 flex flex-col items-start gap-16">
+      
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full border-b border-white/5 pb-16 reveal reveal-stagger-2">
+         <div class="flex flex-col gap-2">
+            <span class="text-gold uppercase tracking-[0.3em] text-[10px] opacity-60">Focus Area</span>
+            <span class="text-3xl text-white font-serif">{{ artist.category.value | default: "Digital Surrealism" }}</span>
+         </div>
+         <div class="flex flex-col gap-2">
+            <span class="text-gold uppercase tracking-[0.3em] text-[10px] opacity-60">Origin</span>
+            <span class="text-3xl text-white font-serif">{{ artist.origin.value | default: "The Deep Forest" }}</span>
+         </div>
+      </div>
+
+      <!-- Bio Text -->
+      <div class="flex flex-col gap-8 reveal reveal-stagger-3">
+         <div class="prose prose-invert prose-lg text-white/50 leading-relaxed font-serif text-2xl md:text-3xl">
+           {{ artist.biography.value | default: artist.short_bio.value | newline_to_br }}
+         </div>
+      </div>
+
+      <!-- Audio Track if available -->
+      {% if artist.audio_track != blank %}
+        <div class="w-full p-8 border border-white/5 bg-white/5 flex items-center justify-between rounded-sm reveal reveal-stagger-4">
+           <div class="flex flex-col gap-2">
+              <span class="text-gold uppercase tracking-widest text-[10px]">Ambient Soul</span>
+              <span class="text-white font-serif">Original Composition by {{ artist.name.value }}</span>
+           </div>
+           
+           <button id="audio-play-toggle" class="w-16 h-16 rounded-full border border-gold/40 flex items-center justify-center group transition-colors hover:bg-gold">
+              <svg class="play block group-[.playing]:hidden text-gold group-hover:text-black" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg class="pause hidden group-[.playing]:block text-gold group-hover:text-black" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+           </button>
+           <audio id="artist-audio" src="{{ artist.audio_track.value.url }}" loop></audio>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Artist Bio",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artist Bio Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,71 @@
+{%- liquid
+  assign site_settings = shop.metaobjects['site_settings']['artist-studio-by-pristine-forests']
+-%}
+
+<section class="bg-white/5 relative py-24 md:py-48 overflow-hidden">
+  
+  <!-- Subtle gold background gradient -->
+  <div class="absolute inset-0 z-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+
+  <div class="container relative z-10">
+    
+    <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+      
+      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
+        Collaboration & Growth
+      </span>
+
+      <h2 class="text-4xl md:text-7xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
+        {{ site_settings.collaboration_title.value | default: "Creating the Soul's Visual Echo" }}
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
+         
+         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-2">
+            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The What</span>
+            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
+               {{ site_settings.collaboration_what_text.value | default: "Collaborate with talented digital artists globally." }}
+            </p>
+         </div>
+
+         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-3">
+            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The Why</span>
+            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
+               {{ site_settings.collaboration_why_text.value | default: "Empowering artists to monetize their surreal creations." }}
+            </p>
+         </div>
+
+         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-4">
+            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The Extra</span>
+            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
+               {{ site_settings.collaboration_extra_text.value | default: "Transparent splits and full control for creators." }}
+            </p>
+         </div>
+
+      </div>
+
+      <!-- CTA / Discount Code -->
+      {% if site_settings.artist_studio_discount_code != blank %}
+        <div class="mt-20 p-8 border border-gold/20 inline-flex flex-col items-center gap-4 reveal reveal-stagger-5">
+           <span class="text-[10px] uppercase tracking-widest text-white/40">Artist Onboarding Reward</span>
+           <span class="text-3xl font-mono text-gold">{{ site_settings.artist_studio_discount_code.value }}</span>
+           <p class="text-white/60 text-sm max-w-xs">Use this code at checkout to join our creative premium tiers.</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Home Collaboration",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home Collaboration"
+    }
+  ]
+}
+{% endschema %}

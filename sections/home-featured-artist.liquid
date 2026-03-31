@@ -1,0 +1,83 @@
+{%- liquid
+  assign site_settings = shop.metaobjects['site_settings']['artist-studio-by-pristine-forests']
+  assign featured_artist = site_settings.featured_artist.value
+  assign artworks = featured_artist.sticky_scroll.value | default: collections.all.products
+-%}
+
+<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden">
+  
+  <div class="container flex flex-col md:flex-row items-center gap-16 md:gap-32 relative z-10">
+    
+    <!-- Image/Carousel Side (40%) -->
+    <div class="w-full md:w-2/5 overflow-hidden rounded-sm relative group reveal">
+      <div class="absolute inset-0 z-20 border-8 border-gold/10 pointer-events-none group-hover:border-gold/20 transition-colors"></div>
+      
+      <!-- Primary Artist Portrait if Carousel is too much for simple layout -->
+      {% if featured_artist.profile_image != blank %}
+        <div class="aspect-[4/5] relative overflow-hidden">
+          {{ featured_artist.profile_image.value | image_url: width: 800 | image_tag: 
+             class: 'w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105',
+             loading: 'lazy' 
+          }}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        </div>
+      {% endif %}
+
+      <!-- Vertical Carousel overlay or side section -->
+      <div class="absolute -right-16 top-1/2 -translate-y-1/2 w-48 opacity-40 group-hover:opacity-100 transition-opacity hidden md:block">
+         {% render 'featured-carousel', artworks: artworks, speed: '40s' %}
+      </div>
+    </div>
+
+    <!-- Text Side (60%) -->
+    <div class="w-full md:w-3/5 flex flex-col items-start text-left">
+      <span class="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-8 reveal">
+        Featured Artist Spotlight
+      </span>
+      
+      <h2 class="text-4xl md:text-7xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
+        {{ featured_artist.name.value | default: "Featured Soul" }}
+      </h2>
+
+      <div class="flex items-center gap-8 mb-12 reveal reveal-stagger-2">
+         <span class="px-4 py-2 border border-white/20 text-white/60 text-xs uppercase tracking-widest rounded-full">
+           {{ featured_artist.category.value }}
+         </span>
+         <span class="px-4 py-2 border border-white/20 text-white/60 text-xs uppercase tracking-widest rounded-full">
+           Member since {{ "now" | date: "%Y" }}
+         </span>
+      </div>
+
+      <p class="text-white/60 text-lg md:text-xl leading-relaxed max-w-2xl mb-16 reveal reveal-stagger-3">
+        {{ featured_artist.short_bio.value | default: site_settings.featured_artist_intro.value }}
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6 reveal reveal-stagger-4">
+        <a href="{{ featured_artist.system.url | default: "#" }}" 
+           class="bg-white text-black px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-gold transition-colors">
+          View Bio & Artworks
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Decorative Signature -->
+  <div class="absolute top-1/2 -right-8 -translate-y-1/2 -rotate-90 hidden lg:block pointer-events-none reveal">
+    <span class="text-9xl text-white/5 font-signature whitespace-nowrap">
+      {{ featured_artist.name.value }}
+    </span>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Featured Artist",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home Featured Artist"
+    }
+  ]
+}
+{% endschema %}

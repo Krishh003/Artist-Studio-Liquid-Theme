@@ -1,0 +1,22 @@
+{% comment %}
+  Parameters:
+    - collection (Collection): Source of images for scatter
+{% endcomment %}
+
+<div class="scatter-container hidden lg:block absolute inset-0 z-0 pointer-events-none">
+  {%- assign angles = "-12deg, 8deg, -5deg, 15deg, -8deg, 10deg" | split: ", " -%}
+  {%- assign positions = "top: 10%; left: 5%, top: 25%; right: 10%, top: 50%; left: 15%, top: 15%; left: 40%, bottom: 20%; right: 20%, top: 60%; right: 5%" | split: ", " -%}
+  
+  {%- for product in collection.products limit: 6 -%}
+    {% assign pos_style = positions[forloop.index0] %}
+    {% assign deg = angles[forloop.index0] %}
+    
+    <div class="scatter-img absolute pointer-events-auto"
+         style="{{ pos_style }}; transform: rotate({{ deg }}); width: {{ 200 | plus: forloop.index | times: 1.5 }}px; height: auto;">
+      <img src="{{ product.featured_image | image_url: width: 600 }}" 
+           alt="{{ product.title | escape }}"
+           class="w-full h-full object-cover grayscale-0 hover:grayscale transition-all duration-700"
+           loading="lazy">
+    </div>
+  {%- endfor -%}
+</div>

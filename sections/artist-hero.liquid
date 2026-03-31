@@ -1,0 +1,72 @@
+{% comment %}
+  Artist detail: Sticky Hero Section
+  Drive dynamic logic via artist-content.js
+{% endcomment %}
+
+{%- liquid
+  assign artist = metaobject
+-%}
+
+<section class="sticky-scroll-container bg-black relative" style="height: 400vh">
+  
+  <!-- Outer Sticky Panel -->
+  <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+    
+    <!-- Background Hero Tagline -->
+    <div class="hero-tagline absolute inset-0 flex flex-col items-center justify-center p-8 text-center pointer-events-none transition-opacity duration-300">
+       <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8">
+          {{ artist.category.value | default: "Pristine Forests" }}
+       </span>
+       <h1 class="text-6xl md:text-9xl text-white mb-10 leading-[0.95] tracking-tight">
+          {{ artist.name.value }}
+       </h1>
+    </div>
+
+    <!-- The Card Stack -->
+    <div class="relative w-full h-full flex items-center justify-center pointer-events-none md:pointer-events-auto">
+      {%- assign sticky_cards = artist.sticky_scroll.value -%}
+      {%- for card_ref in sticky_cards -%}
+         <div class="sticky-card absolute w-[300px] h-[400px] md:w-[450px] md:h-[600px] flex-shrink-0 origin-center transition-all duration-150"
+              style="z-index: {{ 40 | minus: forloop.index0 }}; 
+                     transform: rotate({{ forloop.index0 | modulo: 2 | times: 4 | minus: 2 }}deg);">
+            
+            <div class="w-full h-full p-1 bg-white shadow-2xl relative overflow-hidden group">
+               {% if card_ref.featured_image != blank %}
+                  <img src="{{ card_ref.featured_image | image_url: width: 1000 }}" 
+                       class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                       loading="eager">
+               {% else %}
+                  <div class="w-full h-full bg-black/5 flex items-center justify-center">
+                     <span class="text-gold text-xs uppercase tracking-widest">{{ card_ref.title }}</span>
+                  </div>
+               {% endif %}
+               
+               <div class="absolute bottom-4 left-4 right-4 z-10 p-4 border border-white/20 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+                 <span class="text-white text-xs uppercase tracking-widest truncate">{{ card_ref.title }}</span>
+               </div>
+            </div>
+         </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-12 flex flex-col items-center gap-4 opacity-40">
+       <span class="text-[10px] uppercase tracking-[0.3em] text-white">Peel to explore</span>
+       <div class="w-[1px] h-12 bg-gold animate-bounce"></div>
+    </div>
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Artist Hero",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artist Sticky Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "artist-hero",
+      "settings": {}
+    },
+    "bio": {
+      "type": "artist-bio",
+      "settings": {}
+    },
+    "artworks": {
+      "type": "artist-artworks-grid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "bio",
+    "artworks"
+  ]
+}

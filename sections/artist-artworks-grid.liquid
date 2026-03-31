@@ -1,0 +1,63 @@
+{%- liquid
+  assign artist = metaobject
+  
+  {% comment %}
+    In Shopify, we fetch products related to an artist using collections 
+    with the artist's handle or products tagged with 'artist:handle'
+  {% endcomment %}
+  assign artist_handle_tag = artist.handle | prepend: 'artist:'
+  assign collection = collections[artist.handle]
+  
+  {% if collection != blank %}
+    assign artworks = collection.products
+  {% else %}
+    {% comment %} Fallback to searching all products if no collection exists {% endcomment %}
+    assign artworks = collections.all.products | where: 'tags', artist_handle_tag
+  {% endif %}
+-%}
+
+<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">
+  
+  <div class="container relative z-10">
+    
+    <div class="max-w-4xl mx-auto flex flex-col items-center text-center mb-32">
+      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
+        The Portfolio
+      </span>
+      <h2 class="text-5xl md:text-8xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
+        Selected Works
+      </h2>
+      <p class="text-white/40 text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-stagger-2">
+        A curated selection of available pieces, from limited physical prints to exclusive digital ownership.
+      </p>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 px-4 md:px-0">
+      {% for product in artworks limit: 50 %}
+        {% render 'artwork-card', product: product %}
+      {% else %}
+        <div class="col-span-full py-24 text-center">
+           <p class="text-white/20 italic font-serif text-2xl">No artworks listed yet in this artist collection.</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <!-- Artwork Modal Shell -->
+  {% render 'artwork-modal' %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Artist Artworks",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artist Works Grid"
+    }
+  ]
+}
+{% endschema %}
