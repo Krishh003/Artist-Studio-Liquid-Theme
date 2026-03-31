@@ -3,19 +3,42 @@
     - collection (Collection): Source of images for scatter
 {% endcomment %}
 
-<div class="scatter-container hidden lg:block absolute inset-0 z-0 pointer-events-none">
-  {%- assign angles = "-12deg, 8deg, -5deg, 15deg, -8deg, 10deg" | split: ", " -%}
-  {%- assign positions = "top: 10%; left: 5%, top: 25%; right: 10%, top: 50%; left: 15%, top: 15%; left: 40%, bottom: 20%; right: 20%, top: 60%; right: 5%" | split: ", " -%}
+<div class="hidden lg:block absolute inset-0 z-0 pointer-events-none">
+  {%- assign angles = "-6deg, 12deg, 3deg, -8deg, -15deg, 5deg" | split: ", " -%}
+  {%- assign top_pos = "15%, 18%, , , 45%, 40%" | split: ", " -%}
+  {%- assign bottom_pos = ", , 10%, 15%, , " | split: ", " -%}
+  {%- assign left_pos = "5%, , 10%, , 18%, " | split: ", " -%}
+  {%- assign right_pos = ", 8%, , 12%, , 20%" | split: ", " -%}
+  {%- assign widths = "12rem, 10rem, 16rem, 14rem, 8rem, 9rem" | split: ", " -%}
+  {%- assign heights = "18rem, 14rem, 12rem, 14rem, 8rem, 12rem" | split: ", " -%}
+  {%- assign z_indexes = "10, 10, 10, 10, 0, 0" | split: ", " -%}
   
   {%- for product in collection.products limit: 6 -%}
-    {% assign pos_style = positions[forloop.index0] %}
-    {% assign deg = angles[forloop.index0] %}
+    {%- assign i = forloop.index0 -%}
+    {%- assign top = top_pos[i] | strip -%}
+    {%- assign bottom = bottom_pos[i] | strip -%}
+    {%- assign left = left_pos[i] | strip -%}
+    {%- assign right = right_pos[i] | strip -%}
+    {%- assign width = widths[i] | strip -%}
+    {%- assign height = heights[i] | strip -%}
+    {%- assign deg = angles[i] | strip -%}
+    {%- assign z = z_indexes[i] | strip -%}
     
-    <div class="scatter-img absolute pointer-events-auto"
-         style="{{ pos_style }}; transform: rotate({{ deg }}); width: {{ 200 | plus: forloop.index | times: 1.5 }}px; height: auto;">
+    <div class="absolute rounded-lg shadow-2xl border-[4px] border-[#C5A059] overflow-hidden reveal pointer-events-auto"
+         style="
+           {% if top != blank %}top: {{ top }};{% endif %}
+           {% if bottom != blank %}bottom: {{ bottom }};{% endif %}
+           {% if left != blank %}left: {{ left }};{% endif %}
+           {% if right != blank %}right: {{ right }};{% endif %}
+           width: {{ width }}; 
+           height: {{ height }}; 
+           transform: rotate({{ deg }});
+           z-index: {{ z }};
+           {% if i >= 4 %}opacity: 0.6;{% endif %}
+         ">
       <img src="{{ product.featured_image | image_url: width: 600 }}" 
            alt="{{ product.title | escape }}"
-           class="w-full h-full object-cover grayscale-0 hover:grayscale transition-all duration-700"
+           class="w-full h-full object-cover transition-opacity duration-700 hover:opacity-100"
            loading="lazy">
     </div>
   {%- endfor -%}

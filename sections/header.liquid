@@ -1,6 +1,5 @@
-<header class="fixed top-0 inset-x-0 h-[80px] z-[100] transition-all duration-500 border-b border-white/5 backdrop-blur-md bg-transparent data-[scrolled=true]:bg-black/80 data-[scrolled=true]:h-[65px]"
-        id="site-header">
-  <div class="container h-full flex items-center justify-between">
+<header class="fixed top-0 left-0 w-full z-[100] bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/20 transition-all duration-500" id="site-header">
+  <div class="max-w-7xl mx-auto h-20 px-6 grid grid-cols-2 md:grid-cols-3 items-center">
     
     <!-- Logo -->
     <div class="flex justify-start">
@@ -9,7 +8,7 @@
       </a>
     </div>
 
-    <!-- Navigation -->
+    <!-- Desktop Nav - Centered -->
     <nav class="hidden md:flex justify-center gap-8">
       <a href="/pages/artists" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
         Artists
@@ -17,21 +16,22 @@
     </nav>
 
     <!-- Actions -->
-    <div class="flex items-center gap-6">
-      {% render 'dark-mode-toggle' %}
-      
-      <a href="/account" class="p-2 text-white/60 hover:text-white transition-colors" aria-label="Account">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-        </svg>
-      </a>
+    <div class="flex justify-end items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        {% render 'dark-mode-toggle' %}
+        
+        <a href="/account" class="p-2 text-text-muted hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Account">
+          <span class="material-icons text-xl">account_circle</span>
+        </a>
+      </div>
 
-      <!-- Mobile Hamburger -->
-      <button class="md:hidden p-2 text-white" aria-label="Open Menu">
-         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-           <path d="M4 8h16M4 16h16"/>
-         </svg>
-      </button>
+      <!-- Mobile Menu Toggle -->
+      <div class="md:hidden flex items-center gap-4">
+        {% render 'dark-mode-toggle' %}
+        <button class="text-text-muted hover:text-primary transition" aria-label="Toggle menu">
+           <span class="material-icons text-2xl">menu</span>
+        </button>
+      </div>
     </div>
   </div>
 </header>

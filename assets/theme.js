@@ -93,7 +93,7 @@ function initIntersectionObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
+        entry.target.classList.add('visible');
         // Once visible, we can stop observing
         observer.unobserve(entry.target);
       }
