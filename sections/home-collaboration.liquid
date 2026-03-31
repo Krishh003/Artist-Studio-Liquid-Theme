@@ -7,49 +7,61 @@
   <!-- Subtle gold background gradient -->
   <div class="absolute inset-0 z-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-50 pointer-events-none"></div>
 
-  <div class="container relative z-10">
+  <div class="container max-w-7xl mx-auto relative z-10">
     
-    <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
-      
-      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
-        Collaboration & Growth
-      </span>
-
-      <h2 class="text-4xl md:text-7xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
-        {{ site_settings.collaboration_title.value | default: "Creating the Soul's Visual Echo" }}
+    <header class="mb-24 text-center flex flex-col items-center">
+      <h2 class="w-full text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif font-normal text-slate-900 dark:text-text-light mb-8 uppercase tracking-tighter leading-none reveal">
+        Collaboration
       </h2>
+      <div class="h-[1px] w-32 bg-[#31544E] mx-auto origin-center reveal reveal-stagger-1"></div>
+    </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
-         
-         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-2">
-            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The What</span>
-            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
-               {{ site_settings.collaboration_what_text.value | default: "Collaborate with talented digital artists globally." }}
-            </p>
-         </div>
+    <div class="space-y-24">
+      
+      <!-- What is Artist Studio? -->
+      {% if site_settings.collaboration_what_text.value != blank %}
+        <div class="max-w-3xl reveal reveal-stagger-2">
+           <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-text-light uppercase tracking-tight mb-6">
+              What is Artist Studio?
+           </h3>
+           <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4">
+              {{ site_settings.collaboration_what_text.value | newline_to_br }}
+           </div>
+        </div>
+      {% endif %}
 
-         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-3">
-            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The Why</span>
-            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
-               {{ site_settings.collaboration_why_text.value | default: "Empowering artists to monetize their surreal creations." }}
-            </p>
-         </div>
+      <!-- Why We Do It -->
+      {% if site_settings.collaboration_why_text.value != blank %}
+        <div class="max-w-3xl ml-auto reveal reveal-stagger-3">
+           <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-text-light uppercase tracking-tight mb-6">
+              Why We Do It
+           </h3>
+           <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4">
+              {{ site_settings.collaboration_why_text.value | newline_to_br }}
+           </div>
+        </div>
+      {% endif %}
 
-         <div class="flex flex-col items-center gap-6 p-8 bg-black/40 border border-white/5 backdrop-blur-sm rounded-sm reveal reveal-stagger-4">
-            <span class="text-xs uppercase tracking-widest text-gold opacity-60">The Extra</span>
-            <p class="text-white/60 text-lg md:text-xl leading-relaxed">
-               {{ site_settings.collaboration_extra_text.value | default: "Transparent splits and full control for creators." }}
-            </p>
-         </div>
-
-      </div>
-
-      <!-- CTA / Discount Code -->
-      {% if site_settings.artist_studio_discount_code != blank %}
-        <div class="mt-20 p-8 border border-gold/20 inline-flex flex-col items-center gap-4 reveal reveal-stagger-5">
-           <span class="text-[10px] uppercase tracking-widest text-white/40">Artist Onboarding Reward</span>
-           <span class="text-3xl font-mono text-gold">{{ site_settings.artist_studio_discount_code.value }}</span>
-           <p class="text-white/60 text-sm max-w-xs">Use this code at checkout to join our creative premium tiers.</p>
+      <!-- And There's Something Extra -->
+      {% if site_settings.collaboration_extra_text.value != blank or site_settings.artist_studio_discount_code.value != blank %}
+        <div class="bg-[#E5E4D7] dark:bg-[#1B3B36] p-10 md:p-16 rounded-sm border border-slate-300 dark:border-primary/10 text-center reveal reveal-stagger-4">
+           <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-white uppercase tracking-tight mb-6">
+              And There's Something Extra
+           </h3>
+           {% if site_settings.collaboration_extra_text.value != blank %}
+              <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4 max-w-2xl mx-auto mb-10">
+                 {{ site_settings.collaboration_extra_text.value | newline_to_br }}
+              </div>
+           {% endif %}
+           {% if site_settings.artist_studio_discount_code.value != blank %}
+              <p class="text-xs font-bold tracking-widest text-[#31544E] dark:text-[#E5E4D7] uppercase">
+                 Use code 
+                 <span class="inline-block bg-[#31544E] dark:bg-[#E5E4D7] text-white dark:text-[#1B3B36] px-3 py-1 rounded font-mono tracking-wider">
+                    {{ site_settings.artist_studio_discount_code.value }}
+                 </span> 
+                 at checkout
+              </p>
+           {% endif %}
         </div>
       {% endif %}
 

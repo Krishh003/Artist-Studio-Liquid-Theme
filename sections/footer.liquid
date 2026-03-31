@@ -6,73 +6,58 @@
     </svg>
   </div>
 
-  <div class="container relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32">
-      
-      <!-- Brand Column -->
-      <div class="flex flex-col gap-8">
-        <div class="flex items-center gap-4">
-           <div class="w-12 h-12 border border-gold flex items-center justify-center p-2">
-             <svg viewBox="0 0 24 24" class="w-full h-full text-gold" fill="currentColor">
-                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
-             </svg>
-           </div>
-           <div class="flex flex-col">
-             <span class="text-2xl tracking-tighter text-white font-serif uppercase leading-none">Pristine</span>
-             <span class="text-xs text-gold uppercase tracking-[0.3em] font-sans leading-none">Forests</span>
-           </div>
-        </div>
-        <p class="text-white/40 text-sm leading-relaxed max-w-sm">
-           A digital stage for the soulful and the surreal. curated art from the heart of the forest.
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
+      <div class="max-w-xs">
+        <a href="/" class="text-2xl font-serif font-bold tracking-tight text-slate-900 dark:text-text-light mb-6 block">Pristine Forests</a>
+        <p class="text-slate-600 dark:text-text-muted text-sm leading-relaxed mb-6 font-light">
+          {{ site_settings.footer_tagline.value | default: "An experimental platform dedicated to the intersection of art and beauty." }}
         </p>
-        <div class="flex gap-4">
-          <a href="#" class="text-white/40 hover:text-gold transition-colors">Instagram</a>
-          <a href="#" class="text-white/40 hover:text-gold transition-colors">X (Twitter)</a>
+        <div class="flex space-x-4 mt-6">
+          <a href="#" aria-label="Facebook" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
+             <span class="material-icons text-sm">facebook</span>
+          </a>
+          <a href="#" aria-label="Email" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
+             <span class="material-icons text-sm">alternate_email</span>
+          </a>
+          <a href="#" aria-label="Share" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
+             <span class="material-icons text-sm">share</span>
+          </a>
         </div>
       </div>
 
-      <!-- Links Column -->
-      <div class="grid grid-cols-2 gap-8">
-         <div class="flex flex-col gap-6">
-           <span class="text-xs uppercase tracking-widest text-gold mb-2">Explore</span>
-           <a href="/pages/artists" class="text-sm text-white/60 hover:text-white transition-colors">Artists</a>
-           <a href="/collections/all" class="text-sm text-white/60 hover:text-white transition-colors">Shop All</a>
-           <a href="/pages/collaboration" class="text-sm text-white/60 hover:text-white transition-colors">Collaborate</a>
-         </div>
-         <div class="flex flex-col gap-6">
-           <span class="text-xs uppercase tracking-widest text-gold mb-2">Legal</span>
-           <a href="/pages/terms" class="text-sm text-white/60 hover:text-white transition-colors">Terms</a>
-           <a href="/pages/privacy" class="text-sm text-white/60 hover:text-white transition-colors">Privacy</a>
-           <a href="/admin" class="text-sm text-white/60 hover:text-white transition-colors">Shopify Admin</a>
-         </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-24 w-full lg:w-auto">
+        <div>
+           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Platform</h4>
+           <ul class="space-y-3 md:space-y-4 text-sm text-slate-600 dark:text-text-muted font-light">
+              <li><a href="/pages/artists" class="hover:text-primary transition-colors">Artist Directory</a></li>
+           </ul>
+        </div>
+        <div>
+           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Company</h4>
+           <ul class="space-y-3 md:space-y-4 text-sm text-slate-600 dark:text-text-muted font-light">
+              <li><a href="https://admin.shopify.com" target="_blank" class="hover:text-primary transition-colors flex items-center gap-1 font-semibold">Admin Login <span class="material-icons text-[10px] dark:text-white">lock</span></a></li>
+           </ul>
+        </div>
+        <div class="col-span-1 sm:col-span-2 md:col-span-1">
+           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Newsletter</h4>
+           <p class="text-xs text-slate-600 dark:text-text-muted mb-4 font-light">Subscribe for art drops.</p>
+           <form class="flex flex-col gap-2 w-full max-w-sm">
+              <input class="w-full bg-background-accent border border-primary/20 rounded-md px-4 py-2 text-sm text-text-light placeholder-text-muted/50 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-shadow"
+                 placeholder="Email Address" type="email" aria-label="Email Address">
+              <button class="w-full bg-primary text-white rounded-md px-4 py-3 md:py-2 text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20" type="button">
+                 Join
+              </button>
+           </form>
+        </div>
       </div>
-
-      <!-- Newsletter Column -->
-      <div class="flex flex-col gap-8">
-        <span class="text-xs uppercase tracking-widest text-gold">The Studio Digest</span>
-        <p class="text-white/60 text-sm leading-relaxed">
-           Stay updated with our latest artist features & gallery releases.
-        </p>
-        <form class="flex gap-2">
-          <input type="email" placeholder="Email Address" 
-                 class="bg-white/5 border border-white/10 px-4 py-3 text-sm text-white focus:border-gold outline-none flex-grow">
-          <button type="submit" class="bg-gold text-black px-6 py-3 uppercase tracking-widest text-xs font-semibold hover:bg-white transition-colors">
-            Join
-          </button>
-        </form>
-      </div>
-
     </div>
-
-    <!-- Copyright -->
-    <div class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="text-white/20 text-xs">
-        &copy; {{ 'now' | date: "%Y" }} Pristine Forests. All rights reserved.
-      </p>
-      <div class="flex items-center gap-4 grayscale opacity-40">
-         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa.svg" width="30" height="20" alt="Visa">
-         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/mastercard.svg" width="30" height="20" alt="Mastercard">
-         <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/american_express.svg" width="30" height="20" alt="Amex">
+    
+    <div class="border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted/60 font-medium">
+      <p>© 2026 Pristine Forests. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="/pages/privacy" class="hover:text-text-light">Privacy Policy</a>
+        <a href="/pages/terms" class="hover:text-text-light">Terms of Service</a>
       </div>
     </div>
   </div>

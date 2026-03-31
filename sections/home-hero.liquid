@@ -16,22 +16,17 @@
         Digital Art Collective
       </span>
 
-      <h1 class="text-5xl md:text-8xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
-        {{ site_settings.hero_title.value | default: "The Deepest Forest of Expression" }}
+      <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-tight tracking-tighter text-slate-900 dark:text-text-light mb-6 uppercase reveal reveal-stagger-1">
+        {{ site_settings.hero_title.value | default: "Artist Studio by Pristine Forests" }}
       </h1>
 
-      <div class="h-px w-32 bg-gold/30 mb-12 reveal reveal-stagger-2"></div>
-
-      <p class="text-white/60 text-lg md:text-xl leading-relaxed max-w-2xl mb-16 reveal reveal-stagger-3">
-        {{ site_settings.hero_summary_text.value | default: "Discover a curated gallery of digital surrealism, traditional mastery, and contemporary souls." }}
+      <p class="text-sm sm:text-base text-slate-500 dark:text-text-muted max-w-md mx-auto font-normal px-4 mt-8 leading-relaxed reveal reveal-stagger-3">
+        {{ site_settings.hero_description.value | default: "An initiative by Pristine Forests where art meets conscious living." }}
       </p>
 
-      <div class="flex flex-col md:flex-row gap-6 reveal reveal-stagger-4 pointer-events-auto">
-        <a href="/pages/artists" class="bg-gold text-black px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors">
-          Explore Artists
-        </a>
-        <a href="/collections/all" class="border border-white/20 text-white px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white/10 transition-colors backdrop-blur-sm">
-          Visit Storefront
+      <div class="mt-10 reveal reveal-stagger-4 pointer-events-auto">
+        <a href="{{ site_settings.hero_primary_button_link.value | default: "/pages/artists" }}" class="px-10 py-3 bg-[#31544E] text-white rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-[#1B3B36] transition-all duration-300 inline-block">
+          {{ site_settings.hero_primary_button_text.value | default: "Explore Gallery" }}
         </a>
       </div>
 

@@ -3,28 +3,16 @@
   <div class="container h-full flex items-center justify-between">
     
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-4 group">
-      <div class="w-10 h-10 border border-gold flex items-center justify-center p-1 group-hover:rotate-45 transition-transform">
-        <svg viewBox="0 0 24 24" class="w-full h-full text-gold" fill="currentColor">
-          <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
-        </svg>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-xl tracking-tighter text-white font-serif uppercase leading-none">Pristine</span>
-        <span class="text-xs text-gold uppercase tracking-[0.3em] font-sans leading-none">Forests</span>
-      </div>
-    </a>
+    <div class="flex justify-start">
+      <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-slate-900 dark:text-text-light hover:text-primary transition-colors whitespace-nowrap">
+        Pristine Forests
+      </a>
+    </div>
 
     <!-- Navigation -->
-    <nav class="hidden md:flex items-center gap-12">
-      <a href="/pages/artists" class="text-xs uppercase tracking-widest text-white/60 hover:text-gold transition-colors">
+    <nav class="hidden md:flex justify-center gap-8">
+      <a href="/pages/artists" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
         Artists
-      </a>
-      <a href="/collections/all" class="text-xs uppercase tracking-widest text-white/60 hover:text-gold transition-colors">
-         Storefront
-      </a>
-      <a href="/pages/collaboration" class="text-xs uppercase tracking-widest text-white/60 hover:text-gold transition-colors">
-        Collaborate
       </a>
     </nav>
 
