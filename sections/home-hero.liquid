@@ -1,6 +1,9 @@
 {%- liquid
   assign site_settings = shop.metaobjects['site_settings']['artist-studio-by-pristine-forests']
-  assign hero_collection = collections[settings.hero_collection] | default: collections.all
+  assign hero_collection = section.settings.hero_collection
+  if hero_collection == blank or hero_collection.products.size == 0
+    assign hero_collection = collections.all
+  endif
 -%}
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background-light dark:bg-background-dark transition-colors duration-300">
@@ -34,9 +37,9 @@
   </div>
 
   <!-- Scroll Indicator -->
-  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 reveal reveal-stagger-5 opacity-40">
+  <div class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 reveal reveal-stagger-5 opacity-40" style="bottom: 3rem;">
     <span class="text-[10px] uppercase tracking-[0.3em] text-slate-900 dark:text-text-light font-medium">Scroll</span>
-    <div class="w-[1px] h-12 bg-gradient-to-b from-gold-primary to-transparent animate-bounce"></div>
+    <div class="w-[1px] h-12 bg-gradient-to-b from-[#C5A059] to-transparent animate-bounce"></div>
   </div>
 
 </section>

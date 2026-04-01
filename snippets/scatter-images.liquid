@@ -3,15 +3,30 @@
     - collection (Collection): Source of images for scatter
 {% endcomment %}
 
-<div class="hidden lg:block absolute inset-0 z-0 pointer-events-none">
+<style>
+  .scatter-desktop {
+    display: none;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .scatter-desktop {
+      display: block;
+    }
+  }
+</style>
+
+<div class="scatter-desktop">
   {%- assign angles = "-6deg, 12deg, 3deg, -8deg, -15deg, 5deg" | split: ", " -%}
-  {%- assign top_pos = "15%, 18%, , , 45%, 40%" | split: ", " -%}
-  {%- assign bottom_pos = ", , 10%, 15%, , " | split: ", " -%}
-  {%- assign left_pos = "5%, , 10%, , 18%, " | split: ", " -%}
-  {%- assign right_pos = ", 8%, , 12%, , 20%" | split: ", " -%}
+  {%- assign top_pos = "15%,18%,auto,auto,45%,40%" | split: "," -%}
+  {%- assign bottom_pos = "auto,auto,10%,15%,auto,auto" | split: "," -%}
+  {%- assign left_pos = "5%,auto,10%,auto,18%,auto" | split: "," -%}
+  {%- assign right_pos = "auto,8%,auto,12%,auto,20%" | split: "," -%}
   {%- assign widths = "12rem, 10rem, 16rem, 14rem, 8rem, 9rem" | split: ", " -%}
   {%- assign heights = "18rem, 14rem, 12rem, 14rem, 8rem, 12rem" | split: ", " -%}
-  {%- assign z_indexes = "10, 10, 10, 10, 0, 0" | split: ", " -%}
+  {%- assign z_indexes = "10, 10, 10, 10, 1, 1" | split: ", " -%}
   
   {%- for product in collection.products limit: 6 -%}
     {%- assign i = forloop.index0 -%}
@@ -24,17 +39,23 @@
     {%- assign deg = angles[i] | strip -%}
     {%- assign z = z_indexes[i] | strip -%}
     
-    <div class="absolute rounded-lg shadow-2xl overflow-hidden reveal pointer-events-auto {% if i < 4 %}border-[4px] border-[#C5A059]{% else %}border-[2px] border-[#C5A059]/50{% endif %}"
+    <div class="absolute rounded-lg shadow-2xl overflow-hidden reveal pointer-events-auto"
          style="
-           {% if top != blank %}top: {{ top }};{% endif %}
-           {% if bottom != blank %}bottom: {{ bottom }};{% endif %}
-           {% if left != blank %}left: {{ left }};{% endif %}
-           {% if right != blank %}right: {{ right }};{% endif %}
+           top: {{ top }};
+           bottom: {{ bottom }};
+           left: {{ left }};
+           right: {{ right }};
            width: {{ width }}; 
            height: {{ height }}; 
            transform: rotate({{ deg }});
            z-index: {{ z }};
-           {% if i >= 4 %}opacity: 0.6; filter: blur(1px);{% endif %}
+           {% if i < 4 %}
+             border: 4px solid #C5A059;
+           {% else %}
+             border: 2px solid rgba(197, 160, 89, 0.5);
+             opacity: 0.6; 
+             filter: blur(1px);
+           {% endif %}
          ">
       <img src="{{ product.featured_image | image_url: width: 600 }}" 
            alt="{{ product.title | escape }}"
