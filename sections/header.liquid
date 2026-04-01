@@ -1,47 +1,64 @@
 <header class="fixed top-0 left-0 w-full z-[100] bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/20 transition-all duration-500" id="site-header">
-  <div class="max-w-7xl mx-auto h-20 px-6 grid grid-cols-2 md:grid-cols-3 items-center">
-    
-    <!-- Logo -->
-    <div class="flex justify-start">
-      <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-slate-900 dark:text-text-light hover:text-primary transition-colors whitespace-nowrap">
-        Pristine Forests
+  <div class="flex flex-col w-full">
+    <!-- Top Row: Centralised Logo -->
+    <div class="w-full flex justify-center py-4 border-b border-primary/10">
+      <a href="/" class="hover:opacity-80 transition-opacity">
+        <img 
+            src="https://www.pristineforests.com/cdn/shop/files/PF_Logo_2_3.svg?v=1766045387" 
+            alt="Pristine Forests Logo" 
+            class="h-16 md:h-20 w-auto dark:invert dark:brightness-0" 
+            loading="lazy"
+        />
       </a>
     </div>
 
-    <!-- Desktop Nav - Centered -->
-    <nav class="hidden md:flex justify-center gap-8">
-      <a href="/pages/artists" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
-        Artists
-      </a>
-    </nav>
-
-    <!-- Actions -->
-    <div class="flex justify-end items-center gap-4">
-      <div class="hidden md:flex items-center gap-4">
-        {% render 'dark-mode-toggle' %}
-        
-        <a href="/account" class="p-2 text-text-muted hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Account">
-          <span class="material-icons text-xl">account_circle</span>
+    <!-- Bottom Row: Current Navbar -->
+    <div class="max-w-7xl mx-auto w-full h-16 px-6 grid grid-cols-2 md:grid-cols-3 items-center border-b-0">
+      
+      <!-- Left (Brand/Title) -->
+      <div class="flex justify-start">
+        <a href="/" class="hover:opacity-80 transition-opacity flex items-center gap-3">
+          <span class="font-serif text-xl font-semibold tracking-tight text-slate-900 dark:text-text-light whitespace-nowrap">
+            Artist Studio
+          </span>
         </a>
       </div>
 
-      <!-- Mobile Menu Toggle -->
-      <div class="md:hidden flex items-center gap-4">
-        {% render 'dark-mode-toggle' %}
-        <button data-mobile-menu-toggle
-                class="text-text-muted hover:text-primary transition"
-                aria-label="Toggle menu"
-                aria-expanded="false">
-          <span class="material-icons text-2xl" data-menu-icon-open>menu</span>
-          <span class="material-icons text-2xl" data-menu-icon-close style="display:none">close</span>
-        </button>
+      <!-- Desktop Nav - Centered -->
+      <nav class="hidden md:flex justify-center gap-8">
+        <a href="/pages/artists" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+          Artists
+        </a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex justify-end items-center gap-4">
+        <div class="hidden md:flex items-center gap-4">
+          {% render 'dark-mode-toggle' %}
+          
+          <a href="/account" class="p-2 text-text-muted hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Account">
+            <span class="material-icons text-xl">account_circle</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden flex items-center gap-4">
+          {% render 'dark-mode-toggle' %}
+          <button data-mobile-menu-toggle
+                  class="text-text-muted hover:text-primary transition"
+                  aria-label="Toggle menu"
+                  aria-expanded="false">
+            <span class="material-icons text-2xl" data-menu-icon-open>menu</span>
+            <span class="material-icons text-2xl" data-menu-icon-close style="display:none">close</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Mobile Dropdown Menu -->
   <div data-mobile-menu
-       class="md:hidden absolute top-20 left-0 w-full bg-background-light dark:bg-background-dark border-b border-primary/20 shadow-lg flex-col items-center py-6 gap-6 transition-all"
+       class="md:hidden absolute top-full left-0 w-full bg-background-light dark:bg-background-dark border-b border-primary/20 shadow-lg flex-col items-center py-6 gap-6 transition-all"
        style="display:none">
     <style>
       [data-mobile-menu].is-open { display: flex !important; }
