@@ -51,6 +51,11 @@ body {
   overflow-x: hidden;
 }
 
+.dark body {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+}
+
 .font-serif { font-family: var(--font-serif); }
 .font-sans { font-family: var(--font-inter); }
 
@@ -250,3 +255,28 @@ body {
   .lg\:text-9xl { font-size: 8rem; }
   .lg\:flex-row { flex-direction: row; }
 }
+/* Generated Dark Mode Utilities mapped from HTML dark: classes */
+.dark .dark\:bg-\[\#1B3B36\] { background-color: #1B3B36; }
+.dark .dark\:bg-\[\#E5E4D7\] { background-color: #E5E4D7; }
+.dark .dark\:bg-background-accent { background-color: var(--background-accent); }
+.dark .dark\:bg-background-dark { background-color: var(--background-dark); }
+.dark .dark\:bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
+.dark .dark\:bg-primary\/30 { background-color: rgba(49, 84, 78, 0.3); }
+.dark .dark\:bg-white { background-color: #ffffff; }
+
+.dark .dark\:border-primary\/10 { border-color: rgba(49, 84, 78, 0.1); }
+.dark .dark\:border-primary\/20 { border-color: rgba(49, 84, 78, 0.2); }
+.dark .dark\:border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+
+.dark .dark\:mix-blend-screen { mix-blend-mode: screen; }
+.dark .dark\:opacity-\[0\.05\] { opacity: 0.05; }
+
+.dark .dark\:text-\[\#1B3B36\] { color: #1B3B36; }
+.dark .dark\:text-\[\#E5E4D7\] { color: #E5E4D7; }
+.dark .dark\:text-background-dark { color: var(--background-dark); }
+.dark .dark\:text-gold-primary { color: var(--gold-primary); }
+.dark .dark\:text-slate-400 { color: #94a3b8; }
+.dark .dark\:text-text-light { color: var(--text-light); }
+.dark .dark\:text-text-muted { color: var(--text-muted); }
+.dark .dark\:text-white { color: #ffffff; }
+
