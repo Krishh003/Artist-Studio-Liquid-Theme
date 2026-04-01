@@ -28,11 +28,33 @@
       <!-- Mobile Menu Toggle -->
       <div class="md:hidden flex items-center gap-4">
         {% render 'dark-mode-toggle' %}
-        <button class="text-text-muted hover:text-primary transition" aria-label="Toggle menu">
-           <span class="material-icons text-2xl">menu</span>
+        <button data-mobile-menu-toggle
+                class="text-text-muted hover:text-primary transition"
+                aria-label="Toggle menu"
+                aria-expanded="false">
+          <span class="material-icons text-2xl" data-menu-icon-open>menu</span>
+          <span class="material-icons text-2xl" data-menu-icon-close style="display:none">close</span>
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div data-mobile-menu
+       class="md:hidden absolute top-20 left-0 w-full bg-background-light dark:bg-background-dark border-b border-primary/20 shadow-lg flex-col items-center py-6 gap-6 transition-all"
+       style="display:none">
+    <style>
+      [data-mobile-menu].is-open { display: flex !important; }
+    </style>
+    <a href="/pages/artists"
+       class="text-lg font-medium text-slate-900 dark:text-text-light hover:text-primary transition-colors">
+      Artists
+    </a>
+    <a href="/account"
+       class="text-lg font-medium text-slate-900 dark:text-text-light flex items-center gap-2 hover:text-primary transition-colors">
+      <span class="material-icons text-xl">account_circle</span>
+      Login / Account
+    </a>
   </div>
 </header>
 

@@ -1,77 +1,99 @@
 {%- liquid
-  assign product = product
+  assign artist_handle = product.metafields.custom.artist | metafield_tag | default: product.vendor
+  assign artwork_medium = product.metafields.custom.medium.value | default: 'Digital Mixed Media'
+  assign artwork_dimensions = product.metafields.custom.dimensions.value | default: 'Dimensions on Request'
+  assign date_created = product.metafields.custom.date_created.value
+  assign artwork_year = date_created | date: '%Y' | default: 'N/A'
+  assign main_image = product.featured_image
 -%}
 
-<section class="bg-black relative min-h-screen pt-32 pb-48 flex items-center justify-center">
-  
-  <div class="container grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 h-full">
-    
-    <!-- Left: Image side (60% visually on desktop) -->
-    <div class="w-full h-[60vh] md:h-full flex items-center justify-center p-4">
-      <div class="image-zoom-container relative w-full h-full max-w-4xl flex items-center justify-center overflow-hidden bg-white/5 rounded-sm shadow-2xl">
-         <img id="artwork-hero-img" 
-              src="{{ product.featured_image | image_url: width: 1600 }}" 
-              alt="{{ product.title | escape }}"
-              class="zoom-target w-full h-full object-contain transition-transform duration-700 ease-out"
-              data-colorthief-target
-              loading="eager">
-      </div>
-    </div>
+<div class="min-h-screen flex flex-col md:flex-row overflow-hidden bg-background-light dark:bg-background-dark transition-colors">
 
-    <!-- Right: Content side (40% visually on desktop) -->
-    <div class="w-full flex flex-col justify-center p-8 md:p-16 text-white">
-      
-      <div class="flex items-center gap-6 mb-8 reveal reveal-stagger-1 text-gold uppercase tracking-[0.3em] text-xs">
-         <span>Artwork Profile</span>
-         <div class="h-[1px] w-12 bg-gold/30"></div>
-         <span>Available</span>
-      </div>
+  <!-- Left: Image (50%) -->
+  <div class="artwork-reveal w-full md:w-1/2 h-[60vh] md:h-screen relative p-6 md:p-12 lg:p-20 flex items-center justify-center bg-background-accent/30"
+       style="opacity:0; transform: translateX(-50px);">
 
-      <h1 class="text-4xl md:text-7xl mb-8 leading-tight reveal reveal-stagger-2">
-         {{ product.title }}
-      </h1>
+    <!-- Back to Gallery -->
+    <a href="/artist/{{ product.metafields.custom.artist_handle.value | default: product.vendor | handleize }}"
+       class="absolute top-6 left-6 z-50 flex items-center gap-2 text-slate-500 dark:text-text-muted hover:text-primary transition-colors">
+      <span class="material-icons text-sm">arrow_back</span>
+      <span class="text-xs font-bold tracking-widest uppercase">Back to Gallery</span>
+    </a>
 
-      <div class="h-px w-24 bg-gold mb-12 dynamic-accent-bg reveal reveal-stagger-3"></div>
-
-      <div class="grid grid-cols-2 gap-x-12 gap-y-8 mb-16 reveal reveal-stagger-4">
-         <div class="flex flex-col gap-2">
-            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">Price</span>
-            <span class="text-2xl font-mono text-white">{{ product.price | money }}</span>
-         </div>
-         <div class="flex flex-col gap-2">
-            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">Format</span>
-            <span class="text-2xl text-white font-serif">{{ product.type | default: "Digital Original" }}</span>
-         </div>
-         <div class="flex flex-col gap-2">
-            <span class="text-gold uppercase tracking-[0.2em] text-[9px] opacity-60">SKU</span>
-            <span class="text-2xl text-white font-serif">{{ product.variants.first.sku | default: "NF-0" | slice: -4, 4 }}</span>
-         </div>
-      </div>
-
-      <div class="prose prose-invert text-white/50 leading-relaxed font-serif text-xl md:text-2xl mb-16 reveal reveal-stagger-5">
-         {{ product.description }}
-      </div>
-      
-      <div class="flex flex-col md:flex-row gap-6 reveal reveal-stagger-6">
-        <button class="bg-gold text-black px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors dynamic-accent-bg"
-                data-inquiry-button
-                data-title="{{ product.title | escape }}"
-                data-artist="{{ product.vendor | default: 'Pristine Artist' }}">
-          Inquire Now
-        </button>
-        {% if product.available %}
-           <form action="/cart/add" method="post" class="flex-grow">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit" class="w-full border border-white/20 text-white px-12 py-5 uppercase tracking-widest text-sm font-bold hover:bg-white/10 transition-colors backdrop-blur-sm">
-                Add to Collection
-              </button>
-           </form>
-        {% endif %}
-      </div>
+    <div class="image-zoom-container relative w-full h-full flex items-center justify-center overflow-hidden rounded-lg shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)]"
+         style="max-width: 100%; max-height: 100%;">
+      <img class="zoom-target block max-w-full max-h-full w-auto h-auto object-contain cursor-zoom-in transition-transform duration-700"
+           src="{{ main_image | image_url: width: 1600 }}"
+           alt="{{ product.title | escape }}"
+           loading="eager"
+           width="{{ main_image.width }}"
+           height="{{ main_image.height }}">
     </div>
   </div>
 
-</section>
+  <!-- Right: Details (50%) -->
+  <div class="artwork-reveal w-full md:w-1/2 h-auto md:h-screen overflow-y-auto p-6 md:p-12 lg:p-24 flex flex-col justify-center bg-background-light dark:bg-background-dark"
+       style="opacity:0; transform: translateY(50px); transition-delay: 0.2s;">
+    <div class="max-w-xl">
+
+      <!-- Artist link -->
+      <a href="/artist/{{ product.metafields.custom.artist_handle.value | default: product.vendor | handleize }}"
+         class="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 block hover:underline">
+        {{ product.vendor }}
+      </a>
+
+      <!-- Title -->
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-6 leading-tight">
+        {{ product.title }}
+      </h1>
+
+      <!-- Metadata row -->
+      <div class="flex flex-wrap gap-4 sm:gap-8 text-sm text-slate-500 dark:text-text-muted border-b border-black/10 dark:border-white/10 pb-8 mb-8">
+        <div>
+          <span class="block text-xs uppercase tracking-wider opacity-60 mb-1">Year</span>
+          <span class="font-semibold text-slate-900 dark:text-white">{{ artwork_year }}</span>
+        </div>
+        <div>
+          <span class="block text-xs uppercase tracking-wider opacity-60 mb-1">Medium</span>
+          <span class="font-semibold text-slate-900 dark:text-white">{{ artwork_medium }}</span>
+        </div>
+        <div>
+          <span class="block text-xs uppercase tracking-wider opacity-60 mb-1">Dimensions</span>
+          <span class="font-semibold text-slate-900 dark:text-white">{{ artwork_dimensions }}</span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="text-sm text-slate-600 dark:text-text-muted font-light leading-relaxed mb-12">
+        {% if product.description != blank %}
+          {{ product.description }}
+        {% else %}
+          <p>No description available for this artwork.</p>
+        {% endif %}
+      </div>
+
+      <!-- Price + Inquire -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <span class="block text-xs uppercase tracking-wider opacity-60 mb-1">Price</span>
+          <span class="font-serif text-3xl text-slate-900 dark:text-white">
+            {% if product.price > 0 %}
+              ₹ {{ product.price | money_without_currency | remove: ',' | times: 1 | round: 0 }}
+            {% else %}
+              Price on Request
+            {% endif %}
+          </span>
+        </div>
+        <a href="mailto:pankaj.saroj@hotmail.com?subject={{ 'Inquiry: ' | append: product.title | append: ' by ' | append: product.vendor | url_encode }}"
+           class="w-full sm:w-auto flex-1 bg-slate-900 dark:bg-white text-white dark:text-background-dark py-4 px-6 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-primary hover:text-white transition-all duration-300 text-center">
+          Inquire About Artwork
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 {% schema %}
 {
@@ -79,7 +101,7 @@
   "settings": [],
   "presets": [
     {
-      "name": "Artwork Hero Detail"
+      "name": "Artwork Detail"
     }
   ]
 }

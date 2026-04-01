@@ -1,6 +1,6 @@
-{%- liquid
-  assign artists = shop.metaobjects['artist']
--%}
+{%- comment -%}
+  Iterates all artist metaobjects via shop.metaobjects['artist']
+{%- endcomment -%}
 
 <section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">
   
@@ -19,11 +19,10 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-1 px-4 md:px-0">
-      {% for artist_handle in artists %}
-        {% assign artist = artists[artist_handle] %}
-        {% if artist.handle != 'pf-artist' %}
+      {% for artist in shop.metaobjects['artist'] %}
+        {% unless artist.handle == 'pf-artist' %}
           {% render 'artist-card', artist: artist, index: forloop.index0 %}
-        {% endif %}
+        {% endunless %}
       {% endfor %}
     </div>
 

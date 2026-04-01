@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initHeaderScroll();
+  initMobileMenu();
   initIntersectionObserver();
 });
 
@@ -69,16 +70,41 @@ function initHeaderScroll() {
   const header = document.querySelector('header');
   if (!header) return;
 
-  let lastScrollY = window.scrollY;
-
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-    lastScrollY = window.scrollY;
   }, { passive: true });
+}
+
+/**
+ * Toggles the mobile navigation dropdown open/closed.
+ */
+function initMobileMenu() {
+  const toggleBtn = document.querySelector('[data-mobile-menu-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]');
+  const openIcon = document.querySelector('[data-menu-icon-open]');
+  const closeIcon = document.querySelector('[data-menu-icon-close]');
+  if (!toggleBtn || !menu) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('is-open');
+    if (openIcon) openIcon.style.display = isOpen ? 'none' : '';
+    if (closeIcon) closeIcon.style.display = isOpen ? '' : 'none';
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close menu when a link inside it is clicked
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      if (openIcon) openIcon.style.display = '';
+      if (closeIcon) closeIcon.style.display = 'none';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
 }
 
 /**

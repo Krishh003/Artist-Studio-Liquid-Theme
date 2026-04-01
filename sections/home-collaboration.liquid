@@ -19,46 +19,46 @@
     <div class="space-y-24">
       
       <!-- What is Artist Studio? -->
-      {% if site_settings.collaboration_what_text.value != blank %}
+      {% if site_settings.collab_what_body.value != blank %}
         <div class="max-w-3xl reveal reveal-stagger-2">
            <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-text-light uppercase tracking-tight mb-6">
               What is Artist Studio?
            </h3>
            <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4">
-              {{ site_settings.collaboration_what_text.value | newline_to_br }}
+              {{ site_settings.collab_what_body.value | newline_to_br }}
            </div>
         </div>
       {% endif %}
 
       <!-- Why We Do It -->
-      {% if site_settings.collaboration_why_text.value != blank %}
+      {% if site_settings.collab_why_body.value != blank %}
         <div class="max-w-3xl ml-auto reveal reveal-stagger-3">
            <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-text-light uppercase tracking-tight mb-6">
               Why We Do It
            </h3>
            <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4">
-              {{ site_settings.collaboration_why_text.value | newline_to_br }}
+              {{ site_settings.collab_why_body.value | newline_to_br }}
            </div>
         </div>
       {% endif %}
 
       <!-- And There's Something Extra -->
-      {% if site_settings.collaboration_extra_text.value != blank or site_settings.artist_studio_discount_code.value != blank %}
+      {% if site_settings.collab_extra_body.value != blank or site_settings.artist_discount_code.value != blank %}
         <div class="bg-[#E5E4D7] dark:bg-[#1B3B36] p-10 md:p-16 rounded-sm border border-slate-300 dark:border-primary/10 text-center reveal reveal-stagger-4">
            <h3 class="font-serif text-2xl md:text-3xl text-slate-900 dark:text-white uppercase tracking-tight mb-6">
               And There's Something Extra
            </h3>
-           {% if site_settings.collaboration_extra_text.value != blank %}
+           {% if site_settings.collab_extra_body.value != blank %}
               <div class="text-sm text-slate-500 dark:text-text-muted leading-relaxed space-y-4 max-w-2xl mx-auto mb-10">
-                 {{ site_settings.collaboration_extra_text.value | newline_to_br }}
+                 {{ site_settings.collab_extra_body.value | newline_to_br }}
               </div>
            {% endif %}
-           {% if site_settings.artist_studio_discount_code.value != blank %}
+           {% if site_settings.artist_discount_code.value != blank %}
               <p class="text-xs font-bold tracking-widest text-[#31544E] dark:text-[#E5E4D7] uppercase">
-                 Use code 
+                 Use code
                  <span class="inline-block bg-[#31544E] dark:bg-[#E5E4D7] text-white dark:text-[#1B3B36] px-3 py-1 rounded font-mono tracking-wider">
-                    {{ site_settings.artist_studio_discount_code.value }}
-                 </span> 
+                    {{ site_settings.artist_discount_code.value }}
+                 </span>
                  at checkout
               </p>
            {% endif %}

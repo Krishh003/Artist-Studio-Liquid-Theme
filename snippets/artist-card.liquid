@@ -4,7 +4,7 @@
     - index: The loop index for staggered animation
 {% endcomment %}
 
-<a href="{{ artist.url | default: "#" }}" 
+<a href="{{ artist.system.url | default: '/artist/' | append: artist.handle }}"
    class="artist-card-reveal block relative group h-[500px] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 reveal"
    data-index="{{ index }}"
    style="transition-delay: {{ index | times: 100 }}ms;">
@@ -30,7 +30,7 @@
       {{ artist.name.value }}
     </h3>
     <div class="text-white/60 text-sm line-clamp-2 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      {{ artist.short_bio.value | truncatewords: 20 }}
+      {{ artist.bio.value | truncatewords: 20 }}
     </div>
   </div>
 </a>
