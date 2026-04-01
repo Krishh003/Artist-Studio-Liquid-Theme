@@ -11,20 +11,20 @@
     {% comment %} Triple duplication for infinite scroll {% endcomment %}
     {% for i in (1..3) %}
       <div class="flex flex-row gap-6">
-        {% for artwork in artworks limit: 10 %}
-          <div class="carousel-item relative group w-64 md:w-80 aspect-square flex-shrink-0 overflow-hidden rounded-lg">
+        {% for artwork in artworks limit: 4 %}
+          <div class="carousel-item relative group h-64 md:h-80 w-auto flex-shrink-0 overflow-hidden rounded-lg">
             {% if artwork.featured_image != blank %}
-              <img src="{{ artwork.featured_image | image_url: width: 600 }}" 
+              <img src="{{ artwork.featured_image | image_url: height: 800 }}" 
                    alt="{{ artwork.title | escape }}"
-                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                   class="h-full w-auto max-w-none object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                    loading="lazy">
             {% else %}
                <!-- Placeholder or specific metaobject field -->
-               <img src="{{ artwork.preview_image.value | image_url: width: 600 }}" 
-                    class="w-full h-full object-cover">
+               <img src="{{ artwork.preview_image.value | image_url: height: 800 }}" 
+                    class="h-full w-auto max-w-none object-cover">
             {% endif %}
             
-            <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <span class="text-white text-sm font-semibold block truncate">{{ artwork.title }}</span>
             </div>
           </div>
