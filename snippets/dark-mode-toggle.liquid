@@ -1,20 +1,48 @@
-<button
-    id="dark-mode-toggle"
-    class="relative flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-black/5 dark:hover:bg-white/10"
-    aria-label="Toggle theme"
->
+<button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Toggle theme">
     <!-- Light Mode Icon (Visible by default) -->
-    <span class="material-icons text-xl transform transition-transform duration-500 rotate-0 dark:-rotate-90 scale-100 dark:scale-0 absolute text-primary dark:text-gold-light">
-        light_mode
-    </span>
+    <span class="material-icons text-xl icon-light">light_mode</span>
     <!-- Dark Mode Icon (Visible in Dark Mode) -->
-    <span class="material-icons text-xl transform transition-transform duration-500 rotate-90 dark:rotate-0 scale-0 dark:scale-100 absolute text-primary dark:text-gold-light">
-        dark_mode
-    </span>
+    <span class="material-icons text-xl icon-dark">dark_mode</span>
 </button>
 
 <style>
+  .dark-mode-btn {
+    position: relative;
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    transition: background-color 0.3s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .dark-mode-btn:hover { background-color: rgba(0, 0, 0, 0.05); }
+  .dark .dark-mode-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
+
   #dark-mode-toggle .material-icons {
     pointer-events: none;
+    position: absolute;
+    transition: transform 0.5s ease;
+  }
+
+  .icon-light { 
+    transform: rotate(0deg) scale(1); 
+    color: var(--primary); 
+  }
+  .icon-dark { 
+    transform: rotate(90deg) scale(0); 
+    color: var(--primary); 
+  }
+
+  .dark .icon-light { 
+    transform: rotate(-90deg) scale(0); 
+    color: var(--gold-primary); 
+  }
+  .dark .icon-dark { 
+    transform: rotate(0deg) scale(1); 
+    color: var(--gold-primary); 
   }
 </style>
