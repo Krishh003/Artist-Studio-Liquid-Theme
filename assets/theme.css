@@ -203,6 +203,28 @@ body {
 .opacity-\[0\.03\] { opacity: 0.03; }
 .mix-blend-overlay { mix-blend-mode: overlay; }
 
+/* Accessibility skip link — hidden off-screen, visible only on focus */
+.skip-to-content-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+}
+.skip-to-content-link:focus {
+  top: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Custom Component Styles */
 #site-header.scrolled {
   background-color: var(--background-light);
