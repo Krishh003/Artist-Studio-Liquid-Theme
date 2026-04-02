@@ -126,7 +126,7 @@ function initIntersectionObserver() {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.reveal').forEach(el => {
+  document.querySelectorAll('.reveal:not(.artist-card-reveal)').forEach(el => {
     observer.observe(el);
   });
 }

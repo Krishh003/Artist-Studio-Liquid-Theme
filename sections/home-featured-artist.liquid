@@ -1,7 +1,13 @@
 {%- liquid
   assign site_settings = shop.metaobjects['site_settings']['artist-studio-by-pristine-forests']
   assign featured_artist = site_settings.featured_artist.value
-  assign artworks = featured_artist.sticky_scroll.value | default: collections.all.products
+  assign artworks_collection = collections[featured_artist.handle]
+  if artworks_collection != blank and artworks_collection.products.size > 0
+    assign artworks = artworks_collection.products
+  else
+    assign artist_handle_tag = featured_artist.handle | prepend: 'artist:'
+    assign artworks = collections.all.products | where: 'tags', artist_handle_tag
+  endif
 -%}
 
 <section class="py-24 px-6 md:px-12 bg-background-light-accent dark:bg-background-accent relative z-30 transition-colors duration-300">
@@ -40,7 +46,7 @@
 
           <a href="{{ featured_artist.system.url | default: "#" }}" 
              class="inline-flex items-center gap-2 px-8 py-3 bg-[#31544E] text-white rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-[#1B3B36] transition-all duration-300 self-start reveal reveal-stagger-3">
-            Explore His Art <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            Explore Their Art <span class="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
         </div>
 

@@ -26,6 +26,9 @@
 
       <!-- Desktop Nav - Centered -->
       <nav class="hidden md:flex justify-center gap-8">
+        <a href="/collections/all" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+          Shop
+        </a>
         <a href="/pages/artists" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
           Artists
         </a>
@@ -63,6 +66,10 @@
     <style>
       [data-mobile-menu].is-open { display: flex !important; }
     </style>
+    <a href="/collections/all"
+       class="text-lg font-medium text-slate-900 dark:text-text-light hover:text-primary transition-colors">
+      Shop
+    </a>
     <a href="/pages/artists"
        class="text-lg font-medium text-slate-900 dark:text-text-light hover:text-primary transition-colors">
       Artists
@@ -77,8 +84,12 @@
 
 <style>
   #site-header.scrolled {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(253, 252, 251, 0.95);
     height: 65px;
+    border-color: rgba(49, 84, 78, 0.15);
+  }
+  .dark #site-header.scrolled {
+    background-color: rgba(14, 18, 14, 0.95);
     border-color: rgba(255, 255, 255, 0.1);
   }
 </style>
