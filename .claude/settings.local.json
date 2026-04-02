@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:directus-sync-test.myshopify.com)",
+      "WebFetch(domain:artiststudio.pristineforests.com)"
+    ]
+  }
+}
