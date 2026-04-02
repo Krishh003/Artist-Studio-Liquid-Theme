@@ -13,8 +13,7 @@
     <div class="mix-blend-difference text-white flex flex-col items-center">
       <h1 class="font-serif font-normal leading-tight tracking-tighter uppercase flex flex-col items-center reveal reveal-stagger-1 text-center">
         <span class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl w-full block">ARTIST STUDIO</span>
-        <span class="text-2xl sm:text-3xl md:text-4xl mt-4 mb-2 opacity-90 block">BY</span>
-        <span class="text-3xl sm:text-4xl md:text-5xl opacity-90 block">{{ site_settings.hero_title.value | default: "PRISTINE FORESTS" }}</span>
+        <span class="text-2xl sm:text-3xl md:text-4xl mt-4 opacity-90 block">BY PRISTINE FORESTS</span>
       </h1>
       <p class="text-sm sm:text-base max-w-md mx-auto font-normal px-4 mt-8 leading-relaxed opacity-90 reveal reveal-stagger-3">
         {{ site_settings.hero_description.value | default: "An initiative by Pristine Forests where art meets conscious living." }}
@@ -53,11 +52,6 @@
     <div class="absolute inset-0 bg-black/30 z-20 pointer-events-none"></div>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 reveal reveal-stagger-5 opacity-40 z-30" style="bottom: 3rem;">
-    <span class="text-[10px] uppercase tracking-[0.3em] text-white font-medium">Scroll</span>
-    <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent animate-bounce"></div>
-  </div>
 
   {% if carousel_count > 1 %}
   <script>
