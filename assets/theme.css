@@ -114,6 +114,7 @@ body {
 .z-20 { z-index: 20; }
 .z-30 { z-index: 30; }
 .z-100 { z-index: 100; }
+.z-\[9999\] { z-index: 9999; }
 
 .w-full { width: 100%; }
 .w-auto { width: auto; }
@@ -163,6 +164,7 @@ body {
 .bg-background-light { background-color: var(--background-light); }
 .bg-background-dark { background-color: var(--background-dark); }
 .bg-background-accent { background-color: var(--background-accent); }
+.bg-background-light-accent { background-color: var(--background-light-accent); }
 .bg-primary { background-color: var(--primary); }
 .bg-primary-dark { background-color: var(--primary-dark); }
 .bg-transparent { background-color: transparent; }
@@ -197,6 +199,9 @@ body {
 
 .pointer-events-auto { pointer-events: auto; }
 .pointer-events-none { pointer-events: none; }
+
+.opacity-\[0\.03\] { opacity: 0.03; }
+.mix-blend-overlay { mix-blend-mode: overlay; }
 
 /* Custom Component Styles */
 #site-header.scrolled {
