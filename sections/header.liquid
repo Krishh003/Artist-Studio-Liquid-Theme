@@ -1,4 +1,13 @@
-<header class="fixed top-0 left-0 w-full z-100 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/20 transition-all duration-500" id="site-header">
+{%- assign is_hover_only = false -%}
+{%- if request.page_type == 'index' -%}
+  {%- assign is_hover_only = true -%}
+{%- elsif request.page_type == 'page' and page.handle == 'artists' -%}
+  {%- assign is_hover_only = true -%}
+{%- elsif request.page_type == 'metaobject' -%}
+  {%- assign is_hover_only = true -%}
+{%- endif -%}
+
+<header class="fixed top-0 left-0 w-full z-100 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/20 transition-all duration-500{% if is_hover_only %} header-hover-only{% endif %}" id="site-header">
   <div class="flex flex-col w-full">
     <!-- Top Row: Centralised Logo -->
     <div class="w-full flex justify-center py-4 border-b border-primary/10">
@@ -91,6 +100,18 @@
   .dark #site-header.scrolled {
     background-color: rgba(14, 18, 14, 0.95);
     border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    #site-header.header-hover-only {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    #site-header.header-hover-only:hover,
+    #site-header.header-hover-only.scrolled {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
 
