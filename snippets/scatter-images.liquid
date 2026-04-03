@@ -11,6 +11,10 @@
   if products_to_search.size == 0
     assign products_to_search = collections.all.products
   endif
+
+  assign scale_foreground = 1.1
+  assign scale_background = 1.2
+  assign landscape_boost = 1.25
 -%}
 
 {%- if products_to_search.size > 0 -%}
