@@ -25,13 +25,9 @@
     </header>
 
     <!-- Artist grid -->
-    <!-- DEBUG metaobject count: {{ shop.metaobjects['artist'].size | default: 'nil' }} -->
-    <!-- DEBUG direct lookup: {{ shop.metaobjects['artist']['pankaj-saroj'].name.value | default: 'not found' }} -->
-    <!-- DEBUG metaobjects blank: {% if shop.metaobjects['artist'] == blank %}yes{% else %}no{% endif %} -->
-    <!-- DEBUG dot notation count: {{ shop.metaobjects.artist.size | default: 'nil' }} -->
     <div class="artists-page-grid">
       {%- assign artist_count = 0 -%}
-      {% for artist in shop.metaobjects['artist'] %}
+      {% for artist in shop.metaobjects['artist'].values %}
         {% unless artist.handle == 'pf-artist' %}
           {%- assign artist_count = artist_count | plus: 1 -%}
           {% render 'artist-card', artist: artist, index: forloop.index0 %}
