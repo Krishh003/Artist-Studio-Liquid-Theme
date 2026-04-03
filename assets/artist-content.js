@@ -141,6 +141,14 @@ function initArtworkModal() {
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
 
+        // Trigger right-panel slide-in animation
+        const detail = modal.querySelector('.reveal-modal');
+        if (detail) {
+            detail.classList.remove('reveal-modal--active');
+            void detail.offsetWidth; // force reflow to restart transition
+            detail.classList.add('reveal-modal--active');
+        }
+
         // Pause ambient audio while modal is open
         const ambientAudio = document.getElementById('artist-audio');
         if (ambientAudio) ambientAudio.pause();
@@ -167,6 +175,7 @@ function initArtworkModal() {
         modal.classList.add('hidden');
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
+        modal.querySelector('.reveal-modal')?.classList.remove('reveal-modal--active');
         // Resume ambient audio
         const ambientAudio = document.getElementById('artist-audio');
         if (ambientAudio) ambientAudio.play().catch(() => {});

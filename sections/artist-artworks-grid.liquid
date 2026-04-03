@@ -12,9 +12,6 @@
   if artworks == blank or artworks.size == 0
     assign artworks = collections.all.products | where: 'vendor', artist.name.value
   endif
-  if artworks == blank or artworks.size == 0
-    assign artworks = artist.sticky_scroll.value
-  endif
 -%}
 
 <section class="bg-background-light-accent dark:bg-background-accent" style="padding: 6rem 0;">
@@ -22,41 +19,27 @@
   <div class="container" style="max-width: 80rem; margin: 0 auto; padding: 0 2rem;">
 
     <!-- Section header -->
-    <div style="margin-bottom: 3rem;">
-      <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
-                   text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 1rem;"
-            class="reveal">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem;">
+      <h3 style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+                 text-transform: uppercase; color: #94a3b8;" class="reveal">
         Selected Works
-      </span>
+      </h3>
     </div>
 
     <!-- CSS columns masonry -->
-    <div class="artworks-masonry reveal">
+    <div class="artworks-masonry">
       {% for product in artworks limit: 50 %}
         {% render 'artwork-card', product: product, index: forloop.index0 %}
       {% else %}
-        <p style="text-align: center; padding: 6rem 0; color: rgba(255,255,255,0.2);
+        <p style="text-align: center; padding: 6rem 0; color: rgba(0,0,0,0.2);
                   font-family: var(--font-serif); font-size: 1.5rem; font-style: italic;">
-          No artworks listed yet for this artist.
+          No artworks listed yet.
         </p>
       {% endfor %}
     </div>
 
   </div>
 </section>
-
-<style>
-  .artworks-masonry {
-    columns: 1;
-    gap: 2rem;
-  }
-  @media (min-width: 640px) {
-    .artworks-masonry { columns: 2; }
-  }
-  @media (min-width: 1024px) {
-    .artworks-masonry { columns: 3; }
-  }
-</style>
 
 {% schema %}
 {

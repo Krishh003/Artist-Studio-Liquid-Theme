@@ -161,3 +161,23 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Hero portrait fade-in (0.5s ease-out, matches Next.js opacity entrance) */
+.hero-portrait-fade {
+  animation: hero-fade-in 0.5s ease-out both;
+}
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Modal right-panel slide-in (x: 40→0, 0.4s, delay 0.2s — matches Next.js) */
+.reveal-modal {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+}
+.reveal-modal.reveal-modal--active {
+  opacity: 1;
+  transform: translateX(0);
+}
