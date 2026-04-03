@@ -1,0 +1,98 @@
+{% comment %}
+  Renders scattered images for the hero section background.
+  Accepts:
+  - collection: {Object} The collection to pull images from
+{% endcomment %}
+
+{%- liquid
+  assign scatter_products = collection.products | where: "featured_image" | slice: 0, 6
+  
+  assign scale_foreground = 1.1
+  assign scale_background = 1.2
+  assign landscape_boost = 1.25
+-%}
+
+{%- if scatter_products.size > 0 -%}
+<div class="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden hero-scatter-container">
+  {%- for product in scatter_products -%}
+    {%- liquid
+      assign index = forloop.index0
+      assign is_foreground = false
+      if index < 4
+        assign is_foreground = true
+      endif
+      
+      assign img = product.featured_image
+      assign is_landscape = false
+      if img.width > img.height
+        assign is_landscape = true
+      endif
+      
+      assign base_scale = scale_background
+      if is_foreground
+        assign base_scale = scale_foreground
+      endif
+      
+      assign final_scale = base_scale
+      if is_foreground and is_landscape
+        assign final_scale = base_scale | times: landscape_boost
+      endif
+      
+      case index
+        when 0
+          assign pos_styles = "top: 15%; left: 8%;"
+          assign pos_classes = "w-48 md:w-56 h-64 md:h-72 z-10 hidden lg:flex"
+          assign rotation = "-6deg"
+        when 1
+          assign pos_styles = "top: 18%; right: 8%;"
+          assign pos_classes = "w-40 md:w-48 h-56 md:h-64 z-10 hidden lg:flex"
+          assign rotation = "12deg"
+        when 2
+          assign pos_styles = "bottom: 10%; left: 10%;"
+          assign pos_classes = "w-64 h-48 z-10 hidden lg:flex"
+          assign rotation = "3deg"
+        when 3
+          assign pos_styles = "bottom: 15%; right: 12%;"
+          assign pos_classes = "w-56 h-56 z-10 hidden lg:flex"
+          assign rotation = "-8deg"
+        when 4
+          assign pos_styles = "top: 45%; left: 18%;"
+          assign pos_classes = "w-32 h-32 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
+          assign rotation = "-15deg"
+        when 5
+          assign pos_styles = "top: 40%; right: 20%;"
+          assign pos_classes = "w-36 h-48 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
+          assign rotation = "5deg"
+      endcase
+    -%}
+    
+    <div 
+      class="absolute {{ pos_classes }} items-center justify-center transform transition-transform duration-700" 
+      style="{{ pos_styles }} transform: rotate({{ rotation }}) scale({{ final_scale }});"
+    >
+      <img
+        src="{{ img | image_url: width: 800 }}"
+        alt="{{ product.title | escape }}"
+        class="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl scatter-image {% if is_foreground %}scatter-image-foreground{% else %}scatter-image-background{% endif %}"
+        loading="{% if index < 2 %}eager{% else %}lazy{% endif %}"
+        width="{{ img.width }}"
+        height="{{ img.height }}"
+      >
+    </div>
+  {%- endfor -%}
+</div>
+{%- endif -%}
+
+<style>
+  .scatter-image-foreground {
+    border: 4px solid var(--gold-primary);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+  .scatter-image-foreground:hover {
+    opacity: 1;
+  }
+  .scatter-image-background {
+    border: 2px solid rgba(197, 160, 89, 0.5); /* var(--gold-primary) with 50% opacity */
+  }
+</style>

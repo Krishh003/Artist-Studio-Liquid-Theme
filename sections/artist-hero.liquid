@@ -49,18 +49,15 @@
         <img id="artist-signature"
              src="{{ 'pankaj-sign.png' | asset_url }}"
              alt="Pankaj Saroj signature"
-             class="w-[110vw] md:w-[100vw] lg:w-[95vw] max-w-[80rem] object-contain mix-blend-multiply dark:mix-blend-screen select-none"
-             style="opacity:0; transform: rotate(-10deg) scale(0.95); filter: blur(2px);
-                    transition: opacity 1.5s ease 0.3s, transform 2.5s ease 0.5s;">
+             class="signature-reveal w-[150vw] md:w-[120vw] max-w-[2000px] object-contain mix-blend-multiply dark:mix-blend-screen select-none"
+             style="transform: rotate(-10deg) scale(0.95);">
       {% else %}
         <span id="artist-signature"
-              class="font-mr-de-haviland text-[#cc3333] opacity-20 whitespace-nowrap select-none text-center inline-block px-10 mix-blend-multiply dark:mix-blend-screen"
+              class="signature-reveal font-mr-de-haviland text-[#cc3333] opacity-20 whitespace-nowrap select-none text-center inline-block px-10 mix-blend-multiply dark:mix-blend-screen"
               style="font-family: var(--font-mr-de-haviland), cursive;
                      font-size: clamp(8rem, 22vw, 18rem);
                      filter: blur(3px);
-                     clip-path: inset(0 100% 0 0);
-                     transform: rotate(-10deg) scale(0.95);
-                     transition: clip-path 2.5s ease-in-out 0.5s, opacity 1.5s ease 0.3s, transform 2.5s ease 0.5s;">
+                     transform: rotate(-10deg) scale(0.95);">
           {{ artist.hero_title.value | default: artist.name.value }}
         </span>
       {% endif %}

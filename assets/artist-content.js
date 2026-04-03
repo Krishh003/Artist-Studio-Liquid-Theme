@@ -17,17 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
 function initSignatureReveal() {
     const sig = document.getElementById('artist-signature');
     if (!sig) return;
-    // Small delay to allow browser paint before triggering CSS transitions
-    requestAnimationFrame(() => {
-        setTimeout(() => {
-            sig.style.opacity = '0.2';
-            sig.style.transform = 'rotate(-6deg) scale(1)';
-            // For the text span: reveal clip-path
-            if (sig.tagName === 'SPAN') {
-                sig.style.clipPath = 'inset(0 -20% 0 -20%)';
-            }
-        }, 100);
-    });
+
+    sig.classList.add('signature-reveal');
+
+    const reveal = () => {
+        sig.classList.add('signature-visible');
+    };
+
+    // If it's an image, wait for it to load to avoid flickering during the clip-path animation
+    if (sig.tagName === 'IMG') {
+        if (sig.complete) {
+            setTimeout(reveal, 200);
+        } else {
+            sig.addEventListener('load', () => setTimeout(reveal, 200));
+        }
+    } else {
+        setTimeout(reveal, 200);
+    }
 }
 
 // ---------------------------------------------------------------------------

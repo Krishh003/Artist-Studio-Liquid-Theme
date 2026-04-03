@@ -28,8 +28,22 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
+.bg-background-light\/30 { background-color: rgba(253, 252, 251, 0.3); }
 .bg-background-light\/90 { background-color: rgba(253, 252, 251, 0.9); }
+.dark .bg-background-dark\/50 { background-color: rgba(14, 18, 14, 0.5); }
 .dark .bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
+
+/* Artist Signature Reveal */
+.signature-reveal {
+  opacity: 0;
+  clip-path: inset(0% 100% 0% 0%);
+  transition: opacity 2s ease-out, clip-path 2s ease-out !important;
+}
+
+.signature-reveal.signature-visible {
+  opacity: 1 !important;
+  clip-path: inset(0% 0% 0% 0%) !important;
+}
 .header-logo { filter: none; }
 .dark .header-logo { filter: brightness(0) invert(1); }
 .border-primary\/20 { border-color: rgba(49, 84, 78, 0.2); }
