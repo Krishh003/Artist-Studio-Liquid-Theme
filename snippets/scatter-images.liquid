@@ -47,7 +47,7 @@
         
         case index
           when 0
-            assign pos_styles = "top: 15%; left: 5%;"
+            assign pos_styles = "top: 15%; left: 8%;"
             assign pos_classes = "w-48 md:w-56 h-64 md:h-72 z-10 hidden lg:flex"
             assign rotation = "-6deg"
           when 1
@@ -64,27 +64,29 @@
             assign rotation = "-8deg"
           when 4
             assign pos_styles = "top: 45%; left: 18%;"
-            assign pos_classes = "w-32 h-32 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all text-background-dark/5"
+            assign pos_classes = "w-32 h-32 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
             assign rotation = "-15deg"
           when 5
             assign pos_styles = "top: 40%; right: 20%;"
-            assign pos_classes = "w-36 h-48 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all text-background-dark/5"
+            assign pos_classes = "w-36 h-48 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
             assign rotation = "5deg"
         endcase
       -%}
       
       <div 
-        class="absolute {{ pos_classes }} items-center justify-center transform transition-transform duration-700" 
+        class="absolute {{ pos_classes }} items-center justify-center transform transition-transform duration-700 hero-scatter-item" 
         style="{{ pos_styles }} transform: rotate({{ rotation }}) scale({{ final_scale }});"
       >
-        <img
-          src="{{ img | image_url: width: 800 }}"
-          alt="{{ product.title | escape }}"
-          class="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl scatter-image {% if is_foreground %}scatter-image-foreground{% else %}scatter-image-background{% endif %}"
-          loading="{% if index < 2 %}eager{% else %}lazy{% endif %}"
-          width="{{ img.width }}"
-          height="{{ img.height }}"
-        >
+        <div class="scatter-image-container w-full h-full flex items-center justify-center">
+          <img
+            src="{{ img | image_url: width: 800 }}"
+            alt="{{ product.title | escape }}"
+            class="w-auto h-auto max-w-full max-h-full object-contain rounded-lg scatter-image {% if is_foreground %}scatter-image-foreground{% else %}scatter-image-background{% endif %}"
+            loading="{% if index < 2 %}eager{% else %}lazy{% endif %}"
+            width="{{ img.width }}"
+            height="{{ img.height }}"
+          >
+        </div>
       </div>
     {%- endif -%}
   {%- endfor -%}
@@ -92,15 +94,48 @@
 {%- endif -%}
 
 <style>
+  .scatter-image {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 10px 30px -5px rgba(0, 0, 0, 0.4),
+      0 0 0 1px var(--gold-dark),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
   .scatter-image-foreground {
     border: 4px solid var(--gold-primary);
     opacity: 0.9;
-    transition: opacity 0.3s ease;
   }
-  .scatter-image-foreground:hover {
-    opacity: 1;
-  }
+
   .scatter-image-background {
     border: 2px solid rgba(197, 160, 89, 0.5); /* var(--gold-primary) with 50% opacity */
+  }
+
+  /* Specific hover effect for foreground images */
+  .hero-scatter-container .hero-scatter-item:hover {
+    z-index: 50;
+  }
+
+  .hero-scatter-item:hover .scatter-image-foreground {
+    opacity: 1;
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Inner border effect like Next.js After pseudo-element */
+  .scatter-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scatter-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--gold-light, #E8D3A3);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 8px;
   }
 </style>
