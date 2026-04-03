@@ -1,19 +1,34 @@
 {%- liquid
   assign artist = metaobject
   
-  {% comment %}
-    In Shopify, we fetch products related to an artist using collections 
-    with the artist's handle or products tagged with 'artist:handle'
-  {% endcomment %}
-  assign artist_handle_tag = artist.handle | prepend: 'artist:'
-  assign collection = collections[artist.handle]
+  assign artist_name = artist.name.value
+  assign artist_handle = artist.handle
+  assign artist_handle_tag = artist_handle | prepend: 'artist:'
   
-  {% if collection != blank %}
-    assign artworks = collection.products
-  {% else %}
-    {% comment %} Fallback to searching all products if no collection exists {% endcomment %}
-    assign artworks = collections.all.products | where: 'tags', artist_handle_tag
-  {% endif %}
+  assign artworks = collections[artist_handle].products
+  
+  if artworks == blank or artworks.size == 0
+    assign artworks = collections.all.products | where: 'vendor', artist_name
+  endif
+
+  if artworks == blank or artworks.size == 0
+    assign artworks = artist.sticky_scroll.value
+  endif
+
+  if artworks == blank or artworks.size == 0
+    # Final fallback: search in products via tags loop
+    assign artworks_list = collections.all.products
+    for product in artworks_list
+      if product.tags contains artist_handle_tag or product.tags contains artist_handle or product.vendor == artist_name
+         # Use a slightly different approach since concat with single items can be tricky
+         if artworks == blank
+           assign artworks = product | sort
+         else
+           assign artworks = artworks | concat: product
+         endif
+      endif
+    endfor
+  endif
 -%}
 
 <section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">

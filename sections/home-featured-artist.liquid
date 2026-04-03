@@ -6,17 +6,16 @@
     assign artworks = featured_artist.sticky_scroll.value
     
     if artworks == blank or artworks.size == 0
-      assign artworks_collection = collections[featured_artist.handle]
-      if artworks_collection != blank and artworks_collection.products.size > 0
-        assign artworks = artworks_collection.products
-      else
-        {% comment %} 
-          Fallback: if no collection or sticky_scroll, 
-          we'll search in a small subset of products if needed, 
-          but usually one of the above would have worked.
-        {% endcomment %}
-        assign artworks = collections.all.products
-      endif
+      assign artworks = collections[featured_artist.handle].products
+    endif
+
+    if artworks == blank or artworks.size == 0
+      assign artworks = collections.all.products | where: 'vendor', featured_artist.name.value
+    endif
+
+    if artworks == blank or artworks.size == 0
+       # Fallback to general products if absolutely nothing matches
+       assign artworks = collections.all.products
     endif
   endif
 -%}
