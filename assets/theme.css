@@ -30,8 +30,8 @@
 
 .bg-background-light\/30 { background-color: rgba(253, 252, 251, 0.3); }
 .bg-background-light\/90 { background-color: rgba(253, 252, 251, 0.9); }
-.dark .bg-background-dark\/50 { background-color: rgba(14, 18, 14, 0.5); }
-.dark .bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
+.dark .dark\:bg-background-dark\/50 { background-color: rgba(14, 18, 14, 0.5); }
+.dark .dark\:bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
 
 /* Artist Signature Reveal */
 .signature-reveal {

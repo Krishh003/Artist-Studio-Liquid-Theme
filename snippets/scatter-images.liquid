@@ -81,7 +81,7 @@
           <img
             src="{{ img | image_url: width: 800 }}"
             alt="{{ product.title | escape }}"
-            class="w-auto h-auto max-w-full max-h-full object-contain rounded-lg scatter-image {% if is_foreground %}scatter-image-foreground{% else %}scatter-image-background{% endif %}"
+            class="w-full h-full object-contain rounded-lg scatter-image {% if is_foreground %}scatter-image-foreground{% else %}scatter-image-background{% endif %}"
             loading="{% if index < 2 %}eager{% else %}lazy{% endif %}"
             width="{{ img.width }}"
             height="{{ img.height }}"
