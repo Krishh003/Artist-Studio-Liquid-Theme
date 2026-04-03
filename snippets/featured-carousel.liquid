@@ -8,29 +8,46 @@
   <div class="carousel-content animate-carousel-horizontal flex flex-row gap-6 w-max"
        style="animation-duration: {{ speed | default: '30s' }};">
     
-    {% comment %} Triple duplication for infinite scroll {% endcomment %}
-    {% for i in (1..3) %}
-      <div class="flex flex-row gap-6">
-        {% for artwork in artworks limit: 4 %}
-          <div class="carousel-item relative group h-[120px] md:h-[160px] lg:h-[180px] w-auto flex-shrink-0 overflow-hidden rounded-sm border-[1.5px] border-[#C5A059] shadow-lg">
-            {% if artwork.featured_image != blank %}
-              <img src="{{ artwork.featured_image | image_url: height: 800 }}" 
-                   alt="{{ artwork.title | escape }}"
-                   class="h-full w-auto max-w-none object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                   loading="lazy">
-            {% else %}
-               <!-- Placeholder or specific metaobject field -->
-               <img src="{{ artwork.preview_image.value | image_url: height: 800 }}" 
-                    class="h-full w-auto max-w-none object-cover">
-            {% endif %}
-            
-            <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              <span class="text-white text-sm font-semibold block truncate">{{ artwork.title }}</span>
+    {% comment %} Triple duplication for infinite scroll, but only if we have artworks {% endcomment %}
+    {% if artworks != blank and artworks.size > 0 %}
+      {% for i in (1..3) %}
+        <div class="flex flex-row gap-6">
+          {% for artwork in artworks limit: 6 %}
+            {%- liquid
+              assign artwork_img = ""
+              if artwork.featured_image != blank
+                assign artwork_img = artwork.featured_image
+              elsif artwork.preview_image != blank
+                assign artwork_img = artwork.preview_image.value | default: artwork.preview_image
+              elsif artwork.image != blank
+                assign artwork_img = artwork.image.value | default: artwork.image
+              endif
+            -%}
+            <div class="carousel-item relative group h-[120px] md:h-[160px] lg:h-[180px] w-auto flex-shrink-0 overflow-hidden rounded-sm border-[1.5px] border-[#C5A059] shadow-lg">
+              {% if artwork_img != blank %}
+                <img src="{{ artwork_img | image_url: height: 800 }}" 
+                     alt="{{ artwork.title | default: artwork.name | escape }}"
+                     class="h-full w-auto max-w-none object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                     loading="lazy">
+              {% else %}
+                 <div class="h-full w-[120px] bg-slate-200 dark:bg-primary/20 flex items-center justify-center text-[10px] text-slate-400 p-2 text-center">
+                   {{ artwork.title | default: artwork.name | default: "Untitled Work" }}
+                 </div>
+              {% endif %}
+              
+              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <span class="text-white text-sm font-semibold block truncate">{{ artwork.title | default: artwork.name }}</span>
+              </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% endfor %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% else %}
+       <div class="flex items-center justify-center py-12 w-full">
+         <p class="text-slate-400 text-xs uppercase tracking-widest italic">No artworks found for this artist.</p>
+       </div>
+    {% endif %}
+
   </div>
 </div>
 

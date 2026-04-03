@@ -7,6 +7,10 @@
 {%- liquid
   assign scatter_products = collection.products | where: "featured_image" | slice: 0, 6
   
+  if scatter_products.size == 0
+    assign scatter_products = collections.all.products | where: "featured_image" | slice: 0, 6
+  endif
+
   assign scale_foreground = 1.1
   assign scale_background = 1.2
   assign landscape_boost = 1.25
