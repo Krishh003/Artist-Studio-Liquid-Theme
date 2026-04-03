@@ -8,6 +8,32 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "artist_hero_egxytr": {
+      "type": "artist-hero",
+      "name": "Artist Fullscreen Hero",
+      "settings": {}
+    },
+    "artist_artworks_grid_6w4RLd": {
+      "type": "artist-artworks-grid",
+      "name": "Artist Works Grid",
+      "settings": {}
+    },
+    "artist_meet_3Jka9j": {
+      "type": "artist-meet",
+      "name": "Artist Meet Divider",
+      "settings": {}
+    },
+    "artist_bio_8Q3wzp": {
+      "type": "artist-bio",
+      "name": "Artist Bio Section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "artist_hero_egxytr",
+    "artist_artworks_grid_6w4RLd",
+    "artist_meet_3Jka9j",
+    "artist_bio_8Q3wzp"
+  ]
 }
