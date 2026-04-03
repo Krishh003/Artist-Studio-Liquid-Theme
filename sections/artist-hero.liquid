@@ -1,17 +1,15 @@
 {% comment %}
-  Artist detail: Sticky Scroll Hero Section
-  - Sticky 400vh container with card peel driven by artist-content.js
-  - Artist signature background (text or image for pankaj-saroj)
+  Artist detail: Fullscreen Hero Section
+  - h-screen with noise + crosshatch overlays
+  - Artist signature clip-path wipe-in reveal
+  - Hero image (portrait) centered below signature
   - Ambient audio element
-  - Sticky cards carry data attributes to populate the artwork modal
+  - Scroll indicator
 {% endcomment %}
 
-{%- liquid
-  assign artist = metaobject
-  assign sticky_cards = artist.sticky_scroll.value
--%}
+{%- assign artist = metaobject -%}
 
-<!-- Ambient Audio (hidden) -->
+<!-- Ambient Audio -->
 {% if artist.audio_track != blank %}
   <audio id="artist-audio"
          src="{{ artist.audio_track.value }}"
@@ -24,93 +22,80 @@
          preload="none"></audio>
 {% endif %}
 
-<!-- Audio Mute/Unmute Button (fixed) -->
+<!-- Audio Toggle (fixed) -->
 {% if artist.audio_track != blank or artist.handle == 'elena' %}
-  <div class="fixed bottom-8 right-8 z-[100]">
+  <div class="fixed bottom-8 right-8" style="z-index: 100;">
     <button id="audio-play-toggle"
-            class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all group"
-            aria-label="Toggle ambient audio">
-      <span class="material-icons text-white group-hover:scale-110 transition-transform" data-audio-icon>volume_up</span>
+            aria-label="Toggle ambient audio"
+            style="width: 3rem; height: 3rem; border-radius: 9999px;
+                   background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
+                   border: 1px solid rgba(255,255,255,0.2); display: flex;
+                   align-items: center; justify-content: center;
+                   transition: background 0.2s; cursor: pointer;">
+      <span class="material-icons" data-audio-icon style="color: white; font-size: 1.25rem;">volume_up</span>
     </button>
   </div>
 {% endif %}
 
-<!-- Sticky Scroll Container -->
-<div class="sticky-scroll-container relative" style="height: 400vh;">
-  <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-background-light dark:bg-background-dark transition-colors duration-500">
+<!-- Fullscreen Hero -->
+<section class="hero-section relative overflow-hidden bg-background-light dark:bg-black"
+         style="height: 100vh;">
 
-    <!-- Noise texture layer -->
-    <div class="absolute inset-0 z-[1] pointer-events-none opacity-40 mix-blend-overlay"
-         style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22nf%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23nf)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
+  <!-- Noise texture -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="z-index: 1; opacity: 0.4; mix-blend-mode: overlay;
+              background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22nf%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23nf)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
 
-    <!-- Artist Signature Background -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-[0] px-12 md:px-24" id="artist-signature-wrap">
-      {% if artist.handle == 'pankaj-saroj' %}
-        <img id="artist-signature"
-             src="{{ 'pankaj-sign.png' | asset_url }}"
-             alt="Pankaj Saroj signature"
-             class="signature-reveal w-[150vw] md:w-[120vw] max-w-[2000px] object-contain mix-blend-multiply dark:mix-blend-screen select-none"
-             style="transform: rotate(-10deg) scale(0.95);">
-      {% else %}
-        <span id="artist-signature"
-              class="signature-reveal font-mr-de-haviland text-[#cc3333] opacity-20 whitespace-nowrap select-none text-center inline-block px-10 mix-blend-multiply dark:mix-blend-screen"
-              style="font-family: var(--font-mr-de-haviland), cursive;
-                     font-size: clamp(8rem, 22vw, 18rem);
-                     filter: blur(3px);
-                     transform: rotate(-10deg) scale(0.95);">
-          {{ artist.hero_title.value | default: artist.name.value }}
-        </span>
-      {% endif %}
-    </div>
+  <!-- Crosshatch grid -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="z-index: 1; opacity: 0.3; mix-blend-mode: multiply;
+              background-image: repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0,0,0,0.08) 49px, rgba(0,0,0,0.08) 50px),
+                                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(0,0,0,0.08) 49px, rgba(0,0,0,0.08) 50px);"></div>
 
-    <!-- Card Stack -->
-    <div class="card-stack relative z-10" style="width: min(180px, 42vw); height: min(340px, 70vw);"
-         id="card-stack">
-      {% if sticky_cards != blank and sticky_cards.size > 0 %}
-        {% assign total_cards = sticky_cards.size %}
-        {% for card_product in sticky_cards %}
-          {%- assign card_index = forloop.index0 -%}
-          {%- assign is_last = false -%}
-          {%- if forloop.last -%}{%- assign is_last = true -%}{%- endif -%}
-          <div class="sticky-card{% if is_last %} sticky-card--static{% endif %} artwork-card absolute inset-0 bg-white dark:bg-background-accent p-2 rounded-lg shadow-2xl {% unless is_last %}cursor-pointer{% endunless %}"
-               data-card-index="{{ card_index }}"
-               data-card-total="{{ total_cards }}"
-               data-artwork-id="{{ card_product.id }}"
-               data-image="{{ card_product.featured_image | image_url: width: 1200 }}"
-               data-title="{{ card_product.title | escape }}"
-               data-price="{{ card_product.price | money }}"
-               data-description="{{ card_product.description | strip_html | truncatewords: 50 | escape }}"
-               data-url="{{ card_product.url }}"
-               style="z-index: {{ 40 | minus: card_index }}; transform: rotate({{ card_index | modulo: 2 | times: 4 | minus: 2 }}deg);">
-            {% if card_product.featured_image != blank %}
-              <img src="{{ card_product.featured_image | image_url: width: 1000 }}"
-                   alt="{{ card_product.title | escape }}"
-                   class="w-full h-full object-cover rounded"
-                   loading="eager">
-            {% else %}
-              <div class="w-full h-full bg-slate-200 dark:bg-primary/30 rounded flex items-center justify-center">
-                <span class="text-xs text-slate-400 uppercase tracking-widest text-center px-4">{{ card_product.title }}</span>
-              </div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      {% else %}
-        <div class="sticky-card sticky-card--static absolute inset-0 bg-white dark:bg-background-accent p-2 rounded-lg shadow-2xl">
-          <div class="w-full h-full bg-slate-200 dark:bg-primary/30 rounded flex items-center justify-center text-xs text-slate-400">
-            No highlights
-          </div>
-        </div>
-      {% endif %}
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-50 animate-bounce">
-      <span class="text-[10px] font-mono tracking-[0.2em] text-slate-400 uppercase mix-blend-difference">Scroll</span>
-      <span class="material-icons text-slate-400 text-sm mix-blend-difference">keyboard_arrow_down</span>
-    </div>
-
+  <!-- Signature background -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none px-12"
+       style="z-index: 0;">
+    {% if artist.handle == 'pankaj-saroj' %}
+      <img id="artist-signature"
+           src="{{ 'pankaj-sign.png' | asset_url }}"
+           alt="Pankaj Saroj signature"
+           width="2000" height="600"
+           class="signature-reveal dark:invert select-none"
+           style="width: min(150vw, 2000px); max-width: 2000px; object-fit: contain;
+                  mix-blend-mode: multiply; transform: rotate(-10deg) scale(0.95);">
+    {% else %}
+      <span id="artist-signature"
+            class="signature-reveal select-none text-center"
+            style="font-family: var(--font-cursive, cursive);
+                   font-size: clamp(8rem, 22vw, 18rem);
+                   color: #cc3333; opacity: 0.2;
+                   white-space: nowrap; display: inline-block; padding: 0 2.5rem;
+                   mix-blend-mode: multiply; filter: blur(3px);
+                   transform: rotate(-10deg) scale(0.95);">
+        {{ artist.hero_title.value | default: artist.name.value }}
+      </span>
+    {% endif %}
   </div>
-</div>
+
+  <!-- Hero portrait -->
+  <div class="absolute inset-0 flex items-center justify-center" style="z-index: 2;">
+    {% if artist.hero_image != blank %}
+      <img src="{{ artist.hero_image.value | image_url: width: 800 }}"
+           alt="{{ artist.name.value | escape }}"
+           class="object-contain"
+           style="max-height: 30vh; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+    {% endif %}
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute flex flex-col items-center gap-2 animate-bounce"
+       style="bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10;">
+    <span style="font-size: 0.625rem; font-family: monospace; letter-spacing: 0.2em;
+                 color: #94a3b8; text-transform: uppercase; mix-blend-mode: difference;">Scroll</span>
+    <span class="material-icons" style="color: #94a3b8; font-size: 1rem; mix-blend-mode: difference;">keyboard_arrow_down</span>
+  </div>
+
+</section>
 
 <!-- Artwork Modal (populated by artist-content.js) -->
 {% render 'artwork-modal' %}
@@ -121,7 +106,7 @@
   "settings": [],
   "presets": [
     {
-      "name": "Artist Sticky Hero"
+      "name": "Artist Fullscreen Hero"
     }
   ]
 }
