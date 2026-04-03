@@ -1,47 +1,49 @@
 {%- liquid
   assign site_settings = shop.metaobjects['site_settings']['artist-studio-by-pristine-forests']
 -%}
-<footer class="bg-slate-100 dark:bg-background-dark border-t border-slate-200 dark:border-primary/10 pt-16 pb-8 transition-colors duration-300">
+<footer class="bg-[#0E120E] text-text-light pt-24 pb-12 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
-      <div class="max-w-xs">
-        <a href="/" class="text-2xl font-serif font-bold tracking-tight text-slate-900 dark:text-text-light mb-6 block">Pristine Forests</a>
-        <p class="text-slate-600 dark:text-text-muted text-sm leading-relaxed mb-6 font-light">
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-24">
+      <div class="max-w-sm">
+        <a href="{{ routes.root_url }}" class="text-3xl font-serif font-normal tracking-tight text-white mb-8 block">Pristine Forests</a>
+        <p class="text-text-muted text-sm leading-relaxed mb-10 font-normal opacity-90">
           {{ site_settings.footer_tagline.value | default: "An experimental platform dedicated to the intersection of art and beauty." }}
         </p>
-        <div class="flex space-x-4 mt-6">
-          <a href="#" aria-label="Facebook" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
-             <span class="material-icons text-sm">facebook</span>
+        <div class="flex space-x-5 mt-6">
+          <a href="#" aria-label="Facebook" class="w-10 h-10 flex items-center justify-center rounded-full bg-[#1B3B36] text-white hover:bg-[#31544E] transition-all">
+             <i class="fa-brands fa-facebook-f text-sm"></i>
+             <span class="material-icons text-base">facebook</span>
           </a>
-          <a href="mailto:pankaj.saroj@hotmail.com" aria-label="Email" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
-             <span class="material-icons text-sm">alternate_email</span>
+          <a href="#" aria-label="LinkedIn" class="w-10 h-10 flex items-center justify-center rounded-full bg-[#1B3B36] text-white hover:bg-[#31544E] transition-all">
+             <span class="material-icons text-base">link</span>
           </a>
-          <a href="#" aria-label="Share" class="w-11 h-11 flex items-center justify-center rounded-full bg-background-accent text-text-light hover:bg-primary hover:text-background-dark transition-colors">
-             <span class="material-icons text-sm">share</span>
+          <a href="#" aria-label="Share" class="w-10 h-10 flex items-center justify-center rounded-full bg-[#1B3B36] text-white hover:bg-[#31544E] transition-all">
+             <span class="material-icons text-base">share</span>
           </a>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-24 w-full lg:w-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:gap-32 w-full lg:w-auto">
         <div>
-           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Platform</h4>
-           <ul class="space-y-3 md:space-y-4 text-sm text-slate-600 dark:text-text-muted font-light">
-              <li><a href="/pages/artists" class="hover:text-primary transition-colors">Artist Directory</a></li>
+           <h4 class="font-serif font-normal text-white text-lg mb-8 uppercase tracking-wider">Platform</h4>
+           <ul class="space-y-4 text-sm text-text-muted font-normal">
+              <li><a href="/pages/artists" class="hover:text-white transition-colors">Artist Directory</a></li>
+              <li><a href="{{ routes.all_products_collection_url }}" class="hover:text-white transition-colors">Store</a></li>
            </ul>
         </div>
         <div>
-           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Company</h4>
-           <ul class="space-y-3 md:space-y-4 text-sm text-slate-600 dark:text-text-muted font-light">
-              <li><a href="https://admin.shopify.com" target="_blank" class="hover:text-primary transition-colors flex items-center gap-1 font-semibold">Admin Login <span class="material-icons text-[10px] dark:text-white">lock</span></a></li>
+           <h4 class="font-serif font-normal text-white text-lg mb-8 uppercase tracking-wider">Company</h4>
+           <ul class="space-y-4 text-sm text-text-muted font-normal">
+              <li><a href="https://admin.shopify.com" target="_blank" class="hover:text-white transition-colors flex items-center gap-2">Admin Login <span class="material-icons text-base">lock</span></a></li>
            </ul>
         </div>
         <div class="col-span-1 sm:col-span-2 md:col-span-1">
-           <h4 class="font-serif font-bold text-slate-900 dark:text-text-light mb-4 md:mb-6">Newsletter</h4>
-           <p class="text-xs text-slate-600 dark:text-text-muted mb-4 font-light">Subscribe for art drops.</p>
-           <form class="flex flex-col gap-2 w-full max-w-sm">
-              <input class="w-full bg-background-accent border border-primary/20 rounded-md px-4 py-2 text-sm text-text-light placeholder-text-muted/50 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-shadow"
+           <h4 class="font-serif font-normal text-white text-lg mb-8 uppercase tracking-wider">Newsletter</h4>
+           <p class="text-sm text-text-muted mb-6 font-normal">Subscribe for art drops.</p>
+           <form class="flex flex-col gap-3 w-full max-w-[280px]">
+              <input class="w-full bg-[#1B3B36] border-none rounded-sm px-4 py-3 text-sm text-white placeholder-text-muted/40 focus:ring-1 focus:ring-[#31544E] outline-none transition-all"
                  placeholder="Email Address" type="email" aria-label="Email Address">
-              <button class="w-full bg-primary text-white rounded-md px-4 py-3 md:py-2 text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20" type="button">
+              <button class="w-full bg-[#2D4D47] text-white rounded-sm px-4 py-3 text-sm font-bold hover:bg-[#31544E] transition-all" type="button">
                  Join
               </button>
            </form>
@@ -49,11 +51,11 @@
       </div>
     </div>
     
-    <div class="border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted/60 font-medium">
+    <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] text-text-muted/50 tracking-wider">
       <p>© 2026 Pristine Forests. All rights reserved.</p>
-      <div class="flex gap-6">
-        <a href="/pages/privacy" class="hover:text-text-light">Privacy Policy</a>
-        <a href="/pages/terms" class="hover:text-text-light">Terms of Service</a>
+      <div class="flex gap-8">
+        <a href="/pages/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/pages/terms" class="hover:text-white transition-colors">Terms of Service</a>
       </div>
     </div>
   </div>
