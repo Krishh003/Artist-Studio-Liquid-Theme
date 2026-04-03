@@ -52,7 +52,7 @@ When writing Liquid that accesses Shopify data:
 {{ product.metafields.custom.date_created.value }}
 
 # Artist page URL from a metaobject reference
-{{ artist.system.url | default: '/artist/' | append: artist.handle }}
+{% if artist.system.url != blank %}{{ artist.system.url }}{% else %}/artist/{{ artist.handle }}{% endif %}
 ```
 
 ## JavaScript Conventions

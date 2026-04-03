@@ -25,13 +25,23 @@
     </header>
 
     <!-- Artist grid -->
+    <!-- artist metaobject count: {{ shop.metaobjects['artist'].size | default: 0 }} -->
     <div class="artists-page-grid">
+      {%- assign artist_count = 0 -%}
       {% for artist in shop.metaobjects['artist'] %}
         {% unless artist.handle == 'pf-artist' %}
+          {%- assign artist_count = artist_count | plus: 1 -%}
           {% render 'artist-card', artist: artist, index: forloop.index0 %}
         {% endunless %}
       {% endfor %}
     </div>
+
+    {% if artist_count == 0 %}
+      <p class="text-slate-400 dark:text-text-muted text-sm uppercase tracking-widest text-center py-16 reveal"
+         style="max-width: 42rem; margin: 0 auto;">
+        No artists to display yet.
+      </p>
+    {% endif %}
 
   </div>
 </div>

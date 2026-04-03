@@ -4,7 +4,7 @@
     - index: The loop index for staggered entrance delay
 {% endcomment %}
 
-<a href="{{ artist.system.url | default: '/artists/' | append: artist.handle }}"
+<a href="{% if artist.system.url != blank %}{{ artist.system.url }}{% else %}/artist/{{ artist.handle }}{% endif %}"
    class="artist-card-reveal group"
    data-index="{{ index }}"
    style="--card-delay: {{ index | times: 100 }}ms;
