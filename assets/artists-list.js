@@ -1,28 +1,28 @@
 /**
- * Intersection Observer for staggered grid cards Entrance.
- * Every artist card gets a delay based on its data-index attribute.
- * Also handles the grayscale transition on hover.
+ * Intersection Observer for staggered artist card entrance.
+ * Progressive enhancement: cards are visible without JS.
+ * JS adds .card-ready (hides them) then .is-visible on intersect.
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
+    const artistCards = document.querySelectorAll('.artist-card-reveal');
+    if (!artistCards.length) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Stagger based on data-index
-                const index = entry.target.dataset.index || 0;
-                entry.target.style.transitionDelay = `${index % 4 * 0.1}s`;
+                const index = parseInt(entry.target.dataset.index || '0', 10);
+                entry.target.style.transitionDelay = `${(index % 4) * 0.1}s`;
                 entry.target.classList.add('is-visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -60px 0px'
+    });
 
-    const artistCards = document.querySelectorAll('.artist-card-reveal');
     artistCards.forEach(card => {
+        card.classList.add('card-ready');
         observer.observe(card);
     });
 });

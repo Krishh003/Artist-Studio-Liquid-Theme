@@ -107,7 +107,7 @@
        <script src="{{ 'featured-carousel.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if request.path contains '/pages/artists' -%}
+    {%- if template == 'page.artists' or request.path contains '/pages/artists' -%}
       <script src="{{ 'artists-list.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
