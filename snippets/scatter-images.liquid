@@ -77,7 +77,7 @@
         class="absolute {{ pos_classes }} items-center justify-center transform transition-transform duration-700 hero-scatter-item" 
         style="{{ pos_styles }} transform: rotate({{ rotation }}) scale({{ final_scale }});"
       >
-        <div class="scatter-image-container w-full h-full flex items-center justify-center">
+        <div class="scatter-image-container w-full h-full relative flex items-center justify-center">
           <img
             src="{{ img | image_url: width: 800 }}"
             alt="{{ product.title | escape }}"
