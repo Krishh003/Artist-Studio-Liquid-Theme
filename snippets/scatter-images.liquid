@@ -44,27 +44,27 @@
         case index
           when 0
             assign pos_styles = "top: 15%; left: 5%;"
-            assign pos_classes = "w-32 md:w-56 h-40 md:h-72 z-10 flex"
+            assign pos_classes = "w-48 md:w-56 h-64 md:h-72 z-10 hidden lg:flex"
             assign rotation = "-6deg"
           when 1
-            assign pos_styles = "top: 18%; right: 5%;"
-            assign pos_classes = "w-28 md:w-48 h-36 md:h-64 z-10 flex"
+            assign pos_styles = "top: 18%; right: 8%;"
+            assign pos_classes = "w-40 md:w-48 h-56 md:h-64 z-10 hidden lg:flex"
             assign rotation = "12deg"
           when 2
-            assign pos_styles = "bottom: 15%; left: 8%;"
-            assign pos_classes = "w-40 md:w-64 h-32 md:h-48 z-10 flex"
+            assign pos_styles = "bottom: 10%; left: 10%;"
+            assign pos_classes = "w-64 h-48 z-10 hidden lg:flex"
             assign rotation = "3deg"
           when 3
-            assign pos_styles = "bottom: 20%; right: 10%;"
-            assign pos_classes = "w-36 md:w-56 h-36 md:h-56 z-10 flex"
+            assign pos_styles = "bottom: 15%; right: 12%;"
+            assign pos_classes = "w-56 h-56 z-10 hidden lg:flex"
             assign rotation = "-8deg"
           when 4
-            assign pos_styles = "top: 45%; left: 15%;"
-            assign pos_classes = "w-24 md:w-32 h-24 md:h-32 z-0 hidden md:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
+            assign pos_styles = "top: 45%; left: 18%;"
+            assign pos_classes = "w-32 h-32 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all text-background-dark/5"
             assign rotation = "-15deg"
           when 5
-            assign pos_styles = "top: 40%; right: 18%;"
-            assign pos_classes = "w-28 md:w-36 h-36 md:h-48 z-0 hidden md:flex opacity-60 blur-[1px] hover:blur-0 transition-all"
+            assign pos_styles = "top: 40%; right: 20%;"
+            assign pos_classes = "w-36 h-48 z-0 hidden xl:flex opacity-60 blur-[1px] hover:blur-0 transition-all text-background-dark/5"
             assign rotation = "5deg"
         endcase
       -%}
