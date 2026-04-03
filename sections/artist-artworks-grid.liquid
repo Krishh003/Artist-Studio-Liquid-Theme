@@ -1,69 +1,62 @@
+{% comment %}
+  Artist Artworks Grid
+  - CSS columns masonry layout (not CSS grid)
+  - Artworks sourced from the artist's automated collection
+  - Cards open artwork modal via .artwork-card delegation in artist-content.js
+{% endcomment %}
+
 {%- liquid
   assign artist = metaobject
-  
-  assign artist_name = artist.name.value
   assign artist_handle = artist.handle
-  assign artist_handle_tag = artist_handle | prepend: 'artist:'
-  
   assign artworks = collections[artist_handle].products
-  
   if artworks == blank or artworks.size == 0
-    assign artworks = collections.all.products | where: 'vendor', artist_name
+    assign artworks = collections.all.products | where: 'vendor', artist.name.value
   endif
-
   if artworks == blank or artworks.size == 0
     assign artworks = artist.sticky_scroll.value
   endif
-
-  if artworks == blank or artworks.size == 0
-    # Final fallback: search in products via tags loop
-    assign artworks_list = collections.all.products
-    for product in artworks_list
-      if product.tags contains artist_handle_tag or product.tags contains artist_handle or product.vendor == artist_name
-         # Use a slightly different approach since concat with single items can be tricky
-         if artworks == blank
-           assign artworks = product | sort
-         else
-           assign artworks = artworks | concat: product
-         endif
-      endif
-    endfor
-  endif
 -%}
 
-<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">
-  
-  <div class="container relative z-10">
-    
-    <div class="max-w-4xl mx-auto flex flex-col items-center text-center mb-32">
-      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
-        The Portfolio
-      </span>
-      <h2 class="text-5xl md:text-8xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
+<section class="bg-background-light-accent dark:bg-background-accent" style="padding: 6rem 0;">
+
+  <div class="container" style="max-width: 80rem; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Section header -->
+    <div style="margin-bottom: 3rem;">
+      <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+                   text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 1rem;"
+            class="reveal">
         Selected Works
-      </h2>
-      <p class="text-white/40 text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-stagger-2">
-        A curated selection of available pieces, from limited physical prints to exclusive digital ownership.
-      </p>
+      </span>
     </div>
 
-    <!-- Masonry Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 px-4 md:px-0">
+    <!-- CSS columns masonry -->
+    <div class="artworks-masonry reveal">
       {% for product in artworks limit: 50 %}
-        {% render 'artwork-card', product: product %}
+        {% render 'artwork-card', product: product, index: forloop.index0 %}
       {% else %}
-        <div class="col-span-full py-24 text-center">
-           <p class="text-white/20 italic font-serif text-2xl">No artworks listed yet in this artist collection.</p>
-        </div>
+        <p style="text-align: center; padding: 6rem 0; color: rgba(255,255,255,0.2);
+                  font-family: var(--font-serif); font-size: 1.5rem; font-style: italic;">
+          No artworks listed yet for this artist.
+        </p>
       {% endfor %}
     </div>
 
   </div>
-
-  <!-- Artwork Modal Shell -->
-  {% render 'artwork-modal' %}
-
 </section>
+
+<style>
+  .artworks-masonry {
+    columns: 1;
+    gap: 2rem;
+  }
+  @media (min-width: 640px) {
+    .artworks-masonry { columns: 2; }
+  }
+  @media (min-width: 1024px) {
+    .artworks-masonry { columns: 3; }
+  }
+</style>
 
 {% schema %}
 {
