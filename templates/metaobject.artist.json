@@ -4,18 +4,23 @@
       "type": "artist-hero",
       "settings": {}
     },
-    "bio": {
-      "type": "artist-bio",
-      "settings": {}
-    },
     "artworks": {
       "type": "artist-artworks-grid",
+      "settings": {}
+    },
+    "meet": {
+      "type": "artist-meet",
+      "settings": {}
+    },
+    "bio": {
+      "type": "artist-bio",
       "settings": {}
     }
   },
   "order": [
     "hero",
-    "bio",
-    "artworks"
+    "artworks",
+    "meet",
+    "bio"
   ]
 }

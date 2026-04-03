@@ -1,0 +1,42 @@
+{% comment %}
+  Artist Meet Section — Parallax "Meet {name}" text divider
+  - Large mix-blend-overlay heading
+  - Parallax Y translation driven by initMeetParallax() in artist-content.js
+{% endcomment %}
+
+{%- assign artist = metaobject -%}
+
+<section class="meet-section bg-background-light dark:bg-black"
+         style="padding: 8rem 0; overflow: hidden; position: relative;">
+
+  <div class="meet-section__text"
+       style="text-align: center; will-change: transform;">
+    <h2 style="font-size: clamp(4rem, 10vw, 10rem);
+               font-weight: 900; font-family: var(--font-serif);
+               text-transform: uppercase; letter-spacing: -0.05em;
+               line-height: 1; color: #0f172a;
+               mix-blend-mode: overlay; opacity: 0.9;
+               white-space: pre-line;">Meet
+{{ artist.name.value }}</h2>
+  </div>
+
+</section>
+
+<style>
+  .dark .meet-section__text h2 {
+    color: var(--text-light);
+    mix-blend-mode: normal;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Artist Meet",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Artist Meet Divider"
+    }
+  ]
+}
+{% endschema %}

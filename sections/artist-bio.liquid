@@ -1,83 +1,134 @@
-{%- liquid
-  assign artist = metaobject
--%}
+{% comment %}
+  Artist Bio Section
+  - bg-background-light-accent / dark bg-background-accent
+  - 12-col grid: left sticky portrait + fact rows | right tagline + bio prose
+{% endcomment %}
 
-<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden">
-  
-  <div class="container flex flex-col md:flex-row gap-16 md:gap-32">
-    
-    <!-- Left: Portrait (Sticky) -->
-    <div class="w-full md:w-1/3 flex flex-col">
-       <div class="sticky top-40 aspect-[4/5] bg-gray-900 overflow-hidden rounded-sm group reveal">
-          {% if artist.profile_image != blank %}
-            {{ artist.profile_image.value | image_url: width: 800 | image_tag: 
-               class: 'w-full h-full object-cover transition-all duration-1000 group-hover:scale-105',
-               loading: 'lazy'
-            }}
-          {% else %}
-             <div class="w-full h-full bg-white/5 flex items-center justify-center">
-                <span class="text-white/20 uppercase tracking-widest text-xs">Portrait Pending</span>
-             </div>
-          {% endif %}
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-       </div>
+{%- assign artist = metaobject -%}
 
-       <!-- Artist signature under image -->
-       {% if artist.name != blank %}
-        <div class="mt-8 text-center md:text-right reveal reveal-stagger-1">
-           <span class="text-4xl md:text-6xl text-gold/30 font-signature whitespace-nowrap">
-             {{ artist.name.value }}
-           </span>
+<section class="bg-background-light-accent dark:bg-background-accent" style="padding: 6rem 0;">
+  <div style="max-width: 80rem; margin: 0 auto; padding: 0 2rem;">
+
+    <div class="artist-bio-grid">
+
+      <!-- Left: Sticky portrait + facts -->
+      <div class="artist-bio-left">
+        <div style="position: sticky; top: 8rem;">
+
+          <!-- Portrait -->
+          <div style="border-radius: 0.75rem; overflow: hidden; aspect-ratio: 4/5;
+                      background: #e2e8f0; position: relative;" class="reveal">
+            {% if artist.profile_image != blank %}
+              {{ artist.profile_image.value | image_url: width: 800 | image_tag:
+                 style: 'width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease;',
+                 loading: 'lazy',
+                 sizes: '(max-width: 768px) 100vw, 384px'
+              }}
+            {% else %}
+              <div style="width: 100%; height: 100%; background: rgba(255,255,255,0.05);
+                          display: flex; align-items: center; justify-content: center;">
+                <span style="color: rgba(255,255,255,0.2); text-transform: uppercase;
+                              letter-spacing: 0.1em; font-size: 0.75rem;">Portrait Pending</span>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Fact rows -->
+          <div style="margin-top: 2rem;" class="reveal reveal-stagger-1">
+            {% if artist.origin != blank %}
+              <div style="display: flex; justify-content: space-between;
+                          border-bottom: 1px solid rgba(49,84,78,0.2); padding-bottom: 0.5rem;
+                          margin-bottom: 0.5rem;">
+                <span style="font-size: 0.75rem; text-transform: uppercase;
+                              letter-spacing: 0.1em; color: var(--text-muted);">Origin</span>
+                <span style="font-family: var(--font-serif);">{{ artist.origin.value }}</span>
+              </div>
+            {% endif %}
+            {% if artist.focus != blank or artist.category != blank %}
+              <div style="display: flex; justify-content: space-between;
+                          border-bottom: 1px solid rgba(49,84,78,0.2); padding-bottom: 0.5rem;">
+                <span style="font-size: 0.75rem; text-transform: uppercase;
+                              letter-spacing: 0.1em; color: var(--text-muted);">Focus</span>
+                <span style="font-family: var(--font-serif);">{{ artist.focus.value | default: artist.category.value }}</span>
+              </div>
+            {% endif %}
+          </div>
+
         </div>
-       {% endif %}
-    </div>
-
-    <!-- Right: Stats & Bio -->
-    <div class="w-full md:w-2/3 flex flex-col items-start gap-16">
-      
-      <!-- Stats Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full border-b border-white/5 pb-16 reveal reveal-stagger-2">
-         <div class="flex flex-col gap-2">
-            <span class="text-gold uppercase tracking-[0.3em] text-[10px] opacity-60">Focus Area</span>
-            <span class="text-3xl text-white font-serif">{{ artist.category.value | default: "Digital Surrealism" }}</span>
-         </div>
-         <div class="flex flex-col gap-2">
-            <span class="text-gold uppercase tracking-[0.3em] text-[10px] opacity-60">Origin</span>
-            <span class="text-3xl text-white font-serif">{{ artist.origin.value | default: "The Deep Forest" }}</span>
-         </div>
       </div>
 
-      <!-- Bio Text -->
-      <div class="flex flex-col gap-8 reveal reveal-stagger-3">
-         <div class="prose prose-invert prose-lg text-white/50 leading-relaxed font-serif text-2xl md:text-3xl">
-           {{ artist.bio.value | newline_to_br }}
-         </div>
-      </div>
+      <!-- Right: Tagline + bio prose -->
+      <div class="artist-bio-right">
 
-      <!-- Audio Track if available -->
-      {% if artist.audio_track != blank %}
-        <div class="w-full p-8 border border-white/5 bg-white/5 flex items-center justify-between rounded-sm reveal reveal-stagger-4">
-           <div class="flex flex-col gap-2">
-              <span class="text-gold uppercase tracking-widest text-[10px]">Ambient Soul</span>
-              <span class="text-white font-serif">Original Composition by {{ artist.name.value }}</span>
-           </div>
-           
-           <button id="audio-play-toggle" class="w-16 h-16 rounded-full border border-gold/40 flex items-center justify-center group transition-colors hover:bg-gold">
-              <svg class="play block group-[.playing]:hidden text-gold group-hover:text-black" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        {% if artist.hero_tagline != blank %}
+          <p class="reveal"
+             style="font-family: var(--font-serif); font-style: italic;
+                    font-size: clamp(1.5rem, 3vw, 3rem);
+                    line-height: 1.3; margin-bottom: 3rem;
+                    color: inherit; opacity: 0.85;">
+            {{ artist.hero_tagline.value }}
+          </p>
+        {% endif %}
+
+        {% if artist.bio != blank %}
+          <div class="artist-bio-prose reveal reveal-stagger-2">
+            {{ artist.bio.value | newline_to_br }}
+          </div>
+        {% endif %}
+
+        <!-- Audio track (if available) -->
+        {% if artist.audio_track != blank %}
+          <div class="reveal reveal-stagger-3"
+               style="margin-top: 3rem; padding: 2rem;
+                      border: 1px solid rgba(49,84,78,0.2);
+                      background: rgba(255,255,255,0.5);
+                      display: flex; align-items: center; justify-content: space-between;
+                      border-radius: 0.25rem;">
+            <div>
+              <span style="font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.2em;
+                            color: var(--gold-primary); display: block; margin-bottom: 0.25rem;">Ambient Soul</span>
+              <span style="font-family: var(--font-serif);">Original Composition by {{ artist.name.value }}</span>
+            </div>
+            <button id="audio-play-toggle"
+                    style="width: 4rem; height: 4rem; border-radius: 9999px;
+                           border: 1px solid rgba(197,160,89,0.4); background: transparent;
+                           display: flex; align-items: center; justify-content: center;
+                           cursor: pointer; transition: background 0.2s;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                   style="color: var(--gold-primary);">
                 <path d="M8 5v14l11-7z"/>
               </svg>
-              <svg class="pause hidden group-[.playing]:block text-gold group-hover:text-black" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-              </svg>
-           </button>
-           <audio id="artist-audio" src="{{ artist.audio_track.value.url }}" loop></audio>
-        </div>
-      {% endif %}
+            </button>
+          </div>
+        {% endif %}
 
+      </div>
     </div>
   </div>
-
 </section>
+
+<style>
+  .artist-bio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 768px) {
+    .artist-bio-grid {
+      grid-template-columns: 4fr 8fr;
+      gap: 4rem;
+    }
+  }
+  .artist-bio-prose {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: inherit;
+    opacity: 0.8;
+  }
+  .dark .artist-bio-prose { opacity: 0.7; }
+</style>
 
 {% schema %}
 {
