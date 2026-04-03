@@ -17,10 +17,16 @@
               assign artwork_img = ""
               if artwork.featured_image != blank
                 assign artwork_img = artwork.featured_image
+              elsif artwork.preview_image.value != blank
+                assign artwork_img = artwork.preview_image.value
               elsif artwork.preview_image != blank
-                assign artwork_img = artwork.preview_image.value | default: artwork.preview_image
+                assign artwork_img = artwork.preview_image
+              elsif artwork.image.value != blank
+                assign artwork_img = artwork.image.value
               elsif artwork.image != blank
-                assign artwork_img = artwork.image.value | default: artwork.image
+                assign artwork_img = artwork.image
+              elsif artwork.featured_media != blank
+                assign artwork_img = artwork.featured_media.preview_image
               endif
             -%}
             <div class="carousel-item relative group h-[120px] md:h-[160px] lg:h-[180px] w-auto flex-shrink-0 overflow-hidden rounded-sm border-[1.5px] border-[#C5A059] shadow-lg">

@@ -270,8 +270,17 @@ body {
   100% { transform: translateY(calc(-100% / 3)); }
 }
 
+@keyframes carousel-scroll-horizontal {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 3)); }
+}
+
 .animate-carousel-vertical {
   animation: carousel-scroll-vertical linear infinite;
+}
+
+.animate-carousel-horizontal {
+  animation: carousel-scroll-horizontal linear infinite;
 }
 
 .reveal {
