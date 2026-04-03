@@ -29,16 +29,16 @@
                 assign artwork_img = artwork.featured_media.preview_image
               endif
             -%}
-            <div class="carousel-item relative group h-40 md:h-48 lg:h-56 w-auto flex-shrink-0 overflow-hidden rounded-sm border-[1.5px] border-[#C5A059] shadow-lg">
+            <div class="carousel-item relative group h-64 md:h-80 lg:h-112 w-auto flex-shrink-0 overflow-hidden rounded-md border-2 border-gold shadow-2xl">
               {% if artwork_img != blank %}
-                <img src="{{ artwork_img | image_url: height: 1000 }}" 
+                <img src="{{ artwork_img | image_url: height: 1200 }}" 
                      alt="{{ artwork.title | default: artwork.name | escape }}"
                      class="h-full w-auto max-w-none object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                      loading="lazy"
                      width="{{ artwork_img.width | default: 800 }}"
-                     height="{{ artwork_img.height | default: 1000 }}">
+                     height="{{ artwork_img.height | default: 1200 }}">
               {% else %}
-                  <div class="h-full w-[120px] bg-slate-200 dark:bg-primary/20 flex items-center justify-center text-slate-400">
+                  <div class="h-full w-[200px] bg-slate-200 dark:bg-primary/20 flex items-center justify-center text-slate-400">
                     <span class="material-symbols-outlined opacity-20">image</span>
                   </div>
               {% endif %}

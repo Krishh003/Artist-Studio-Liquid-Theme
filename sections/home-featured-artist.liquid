@@ -42,7 +42,7 @@
               </div>
             {% endif %}
             <div>
-              <span class="text-[10px] font-bold tracking-[0.2em] text-[#31544E] dark:text-gold-primary uppercase mb-1 block">
+              <span class="text-[10px] font-bold tracking-[0.2em] text-[#C5A059] uppercase mb-1 block">
                 {{ featured_artist.category.value | default: "Featured Artist" }}
               </span>
               <h3 class="font-serif text-4xl md:text-5xl text-slate-900 dark:text-text-light uppercase leading-none">
@@ -52,18 +52,21 @@
           </div>
 
           <p class="text-slate-500 dark:text-text-muted text-sm leading-relaxed reveal reveal-stagger-2">
-            {{ site_settings.featured_artist_intro.value | default: featured_artist.short_bio.value }}
+            {{ site_settings.featured_artist_intro.value | default: featured_artist.short_bio.value | default: "Explore the evocative works of this talented artist, known for capturing the essence of the natural world through a masterly blend of light and color." }}
           </p>
 
           <a href="{{ featured_artist.system.url | default: "#" }}" 
              class="inline-flex items-center gap-2 px-8 py-3 bg-[#31544E] text-white rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-[#1B3B36] transition-all duration-300 self-start reveal reveal-stagger-3">
-            Explore Their Art <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            Explore His Art <span class="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
         </div>
 
         <!-- Right column/area: horizontal infinite carousel -->
         <div class="reveal reveal-stagger-4 w-full overflow-hidden lg:w-2/3">
-           {% render 'featured-carousel', artworks: artworks, speed: '40s' %}
+           {% comment %} 
+             Increase/Decrease Speed: Adjust the 'speed' parameter below (e.g., '20s' is faster than '40s').
+           {% endcomment %}
+           {% render 'featured-carousel', artworks: artworks, speed: '20s' %}
         </div>
       </div>
     {% else %}
