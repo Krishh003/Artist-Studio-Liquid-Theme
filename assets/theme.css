@@ -138,6 +138,8 @@ body {
 .h-12 { height: 3rem; }
 .h-16 { height: 4rem; }
 .h-20 { height: 5rem; }
+.h-24 { height: 6rem; }
+.h-28 { height: 7rem; }
 .h-32 { height: 8rem; }
 .h-30 { height: 7.5rem; }
 .h-40 { height: 10rem; }
@@ -148,6 +150,8 @@ body {
 .h-72 { height: 18rem; }
 
 .w-32 { width: 8rem; }
+.w-24 { width: 6rem; }
+.w-28 { width: 7rem; }
 .w-36 { width: 9rem; }
 .w-40 { width: 10rem; }
 .w-48 { width: 12rem; }
@@ -324,6 +328,7 @@ body {
   .md\:h-40 { height: 10rem; }
   .md\:h-48 { height: 12rem; }
   .md\:h-56 { height: 14rem; }
+  .md\:h-56 { height: 14rem; }
   .md\:h-64 { height: 16rem; }
   .md\:h-72 { height: 18rem; }
   .md\:w-3\/5 { width: 60%; }
@@ -351,6 +356,7 @@ body {
   .lg\:w-72 { width: 18rem; }
   .lg\:h-45 { height: 11.25rem; }
   .lg\:h-56 { height: 14rem; }
+  .lg\:h-64 { height: 16rem; }
   .lg\:h-64 { height: 16rem; }
   .lg\:h-72 { height: 18rem; }
 }
