@@ -1,5 +1,7 @@
 # Pristine Forests Artist Studio — Shopify Liquid Theme
 
+This commit is being made to store the fact that the website is somewhat functional
+
 A native Shopify Online Store 2.0 theme for the Pristine Forests Artist Studio. Translated from the headless Next.js storefront (`webDev-Shopify`). All animations are implemented in vanilla CSS and JavaScript — no React, no Framer Motion.
 
 ## Theme Structure
@@ -54,48 +56,48 @@ This theme reads all content from Shopify. No external CMS or database.
 
 ### Metaobject: `artist`
 
-| Field | Type | Used in |
-|---|---|---|
-| `name` | single_line_text | All artist views |
-| `bio` | multi_line_text | Bio section, artist card |
-| `category` | single_line_text | Cards, hero tagline |
-| `origin` | single_line_text | Bio section metadata |
-| `focus` | single_line_text | Bio section metadata |
-| `profile_image` | file | Featured artist, bio section |
-| `hero_title` | single_line_text | Signature background text |
-| `hero_tagline` | single_line_text | Bio section pull quote |
-| `hero_background_image` | file | (reserved) |
-| `audio_track` | file | Ambient audio on artist page |
-| `sticky_scroll` | list.metaobject (→ products) | Hero card stack |
+| Field                     | Type                          | Used in                      |
+| ------------------------- | ----------------------------- | ---------------------------- |
+| `name`                  | single_line_text              | All artist views             |
+| `bio`                   | multi_line_text               | Bio section, artist card     |
+| `category`              | single_line_text              | Cards, hero tagline          |
+| `origin`                | single_line_text              | Bio section metadata         |
+| `focus`                 | single_line_text              | Bio section metadata         |
+| `profile_image`         | file                          | Featured artist, bio section |
+| `hero_title`            | single_line_text              | Signature background text    |
+| `hero_tagline`          | single_line_text              | Bio section pull quote       |
+| `hero_background_image` | file                          | (reserved)                   |
+| `audio_track`           | file                          | Ambient audio on artist page |
+| `sticky_scroll`         | list.metaobject (→ products) | Hero card stack              |
 
 Artist pages resolve at `/artist/{handle}` via the `metaobject.artist.json` template. The URL template must be set to `/artist/{handle}` in Shopify Admin under Content > Metaobjects > Artist > Edit definition.
 
 ### Metaobject: `site_settings` (handle: `artist-studio-by-pristine-forests`)
 
-| Field | Used in |
-|---|---|
-| `hero_title` | Home hero heading |
-| `hero_description` | Home hero subtext |
-| `hero_primary_button_text` | Home hero CTA label |
-| `hero_primary_button_link` | Home hero CTA href |
-| `featured_artist_heading` | Featured section label |
-| `featured_artist_intro` | Featured artist bio override |
-| `featured_artist` | Reference to artist metaobject |
-| `collab_what_body` | Collaboration "What" block |
-| `collab_why_body` | Collaboration "Why" block |
-| `collab_extra_body` | Collaboration "Extra" block |
-| `artist_discount_code` | Discount code display |
-| `footer_tagline` | Footer brand tagline |
+| Field                        | Used in                        |
+| ---------------------------- | ------------------------------ |
+| `hero_title`               | Home hero heading              |
+| `hero_description`         | Home hero subtext              |
+| `hero_primary_button_text` | Home hero CTA label            |
+| `hero_primary_button_link` | Home hero CTA href             |
+| `featured_artist_heading`  | Featured section label         |
+| `featured_artist_intro`    | Featured artist bio override   |
+| `featured_artist`          | Reference to artist metaobject |
+| `collab_what_body`         | Collaboration "What" block     |
+| `collab_why_body`          | Collaboration "Why" block      |
+| `collab_extra_body`        | Collaboration "Extra" block    |
+| `artist_discount_code`     | Discount code display          |
+| `footer_tagline`           | Footer brand tagline           |
 
 ### Products (Artworks)
 
 Products are tagged `artist:{handle}` to associate them with an artist. Artworks use the `product.artwork.json` template.
 
-| Metafield | Namespace | Used in |
-|---|---|---|
-| `medium` | `custom` | Artwork detail metadata |
-| `dimensions` | `custom` | Artwork detail metadata |
-| `date_created` | `custom` | Artwork detail year |
+| Metafield         | Namespace  | Used in                  |
+| ----------------- | ---------- | ------------------------ |
+| `medium`        | `custom` | Artwork detail metadata  |
+| `dimensions`    | `custom` | Artwork detail metadata  |
+| `date_created`  | `custom` | Artwork detail year      |
 | `artist_handle` | `custom` | Back-link to artist page |
 
 The artwork detail back-link uses `product.metafields.custom.artist_handle.value` to construct `/artist/{handle}`. Ensure this metafield is set on each product.
@@ -123,6 +125,7 @@ shopify theme push --store=your-store.myshopify.com
 ```
 
 Or push only changed files:
+
 ```bash
 shopify theme push --only assets/ sections/ snippets/
 ```
