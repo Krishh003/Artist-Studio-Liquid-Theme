@@ -108,6 +108,22 @@
 .reveal-stagger-4 { transition-delay: 0.4s; }
 .reveal-stagger-5 { transition-delay: 0.5s; }
 
+/* Artist card entrance — pure CSS, no JS dependency */
+@keyframes card-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger by card position (up to 8 cards) */
+.artist-card-reveal:nth-child(1) { animation-delay: 0s; }
+.artist-card-reveal:nth-child(2) { animation-delay: 0.1s; }
+.artist-card-reveal:nth-child(3) { animation-delay: 0.2s; }
+.artist-card-reveal:nth-child(4) { animation-delay: 0.3s; }
+.artist-card-reveal:nth-child(5) { animation-delay: 0.4s; }
+.artist-card-reveal:nth-child(6) { animation-delay: 0.5s; }
+.artist-card-reveal:nth-child(7) { animation-delay: 0.6s; }
+.artist-card-reveal:nth-child(8) { animation-delay: 0.7s; }
+
 /* Artwork card entrance — stagger driven by JS (data-index → transitionDelay) */
 .artwork-thumb {
   opacity: 0;
