@@ -1,24 +1,31 @@
-{%- comment -%}
-  Iterates all artist metaobjects via shop.metaobjects['artist']
-{%- endcomment -%}
+{% comment %}
+  Artists listing page — matches the original Next.js /artists route.
+  Layout: page header (H1 + subtitle) → 2-column card grid.
+  Each card delegates to snippets/artist-card.liquid.
+  Entrance animations handled by assets/artists-list.js.
+{% endcomment %}
 
-<section class="bg-black/95 relative py-24 md:py-48 overflow-hidden min-h-screen">
-  
-  <div class="container relative z-10">
-    
-    <div class="max-w-4xl mx-auto flex flex-col items-center text-center mb-32">
-      <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-8 reveal">
-        The Resident Collective
-      </span>
-      <h1 class="text-5xl md:text-8xl text-white mb-10 leading-[0.95] reveal reveal-stagger-1">
-        Soulful & Surreal Artists
+<div class="bg-background-light dark:bg-background-dark"
+     style="min-height: 100vh; padding-top: 8rem; padding-bottom: 5rem;">
+  <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem;">
+
+    <!-- Page header -->
+    <header style="margin-bottom: 5rem; text-align: center;">
+      <h1 class="font-serif reveal"
+          style="font-size: clamp(2.25rem, 6vw, 4.5rem); font-weight: 700;
+                 margin-bottom: 1.5rem; line-height: 1.1;">
+        Collaborating Artists
       </h1>
-      <p class="text-white/40 text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-stagger-2">
-        Browse our growing family of creators, from digital pioneers to traditional masters.
+      <p class="text-slate-600 dark:text-text-muted reveal reveal-stagger-1"
+         style="max-width: 42rem; margin: 0 auto; font-size: 1.125rem;
+                font-weight: 300; line-height: 1.625;">
+        Meet the visionaries who are redefining the boundaries of physical and digital art.
+        Each artist brings a unique perspective to the Pristine Forests collective.
       </p>
-    </div>
+    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-1 px-4 md:px-0">
+    <!-- Artist grid -->
+    <div class="artists-page-grid">
       {% for artist in shop.metaobjects['artist'] %}
         {% unless artist.handle == 'pf-artist' %}
           {% render 'artist-card', artist: artist, index: forloop.index0 %}
@@ -27,13 +34,21 @@
     </div>
 
   </div>
+</div>
 
-  <!-- Background Text -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-12 opacity-5 pointer-events-none reveal">
-    <span class="text-9xl text-white font-serif whitespace-nowrap">CREATIVE COLLECTIVE</span>
-  </div>
-
-</section>
+<style>
+  .artists-page-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .artists-page-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+</style>
 
 {% schema %}
 {
