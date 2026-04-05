@@ -139,7 +139,6 @@ function initArtworkModal() {
             imgEl.alt = data.title || '';
         }
 
-        modal.classList.remove('hidden');
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
 
@@ -174,7 +173,6 @@ function initArtworkModal() {
     }
 
     function closeModal() {
-        modal.classList.add('hidden');
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
         modal.querySelector('.reveal-modal')?.classList.remove('reveal-modal--active');

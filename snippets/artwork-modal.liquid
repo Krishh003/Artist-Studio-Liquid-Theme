@@ -1,4 +1,4 @@
-<div id="artwork-modal" class="hidden artwork-modal-overlay">
+<div id="artwork-modal" class="artwork-modal-overlay">
 
   <!-- Close Button -->
   <button id="modal-close" class="artwork-modal-close" aria-label="Close">
@@ -31,17 +31,18 @@
 <style>
   /* ---- Full-screen overlay ---- */
   .artwork-modal-overlay {
+    display: none;
     position: fixed;
     inset: 0;
     z-index: 500;
     background: rgba(0, 0, 0, 0.97);
-    display: flex;
     flex-direction: row;
     align-items: center;
     overflow-y: auto;
   }
 
   .artwork-modal-overlay.is-open {
+    display: flex;
     animation: modal-fade-in 0.35s ease forwards;
   }
 
