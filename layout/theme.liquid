@@ -93,7 +93,7 @@
     <!-- Core Scripts -->
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
     
-    {%- if template contains 'metaobject.artist' -%}
+    {%- if template contains 'metaobject.artist' or template contains 'metaobject/artist' -%}
       <script src="{{ 'colorthief.min.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'artist-content.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}

@@ -59,7 +59,7 @@ function initStickyScroll() {
 
         // Fade the signature out over the first 60% of scroll
         if (sig) {
-            const sigOpacity = Math.max(0, 0.2 * (1 - Math.min(1, progress / 0.6)));
+            const sigOpacity = Math.max(0, 0.35 * (1 - Math.min(1, progress / 0.6)));
             sig.style.opacity = sigOpacity;
         }
 
