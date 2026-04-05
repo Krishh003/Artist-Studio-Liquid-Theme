@@ -1,7 +1,5 @@
 # Pristine Forests Artist Studio — Shopify Liquid Theme
 
-This commit is being made to store the fact that the website is somewhat functional
-
 A native Shopify Online Store 2.0 theme for the Pristine Forests Artist Studio. Translated from the headless Next.js storefront (`webDev-Shopify`). All animations are implemented in vanilla CSS and JavaScript — no React, no Framer Motion.
 
 ## Theme Structure
@@ -14,11 +12,11 @@ webDev-liquid/
 │   ├── colorthief.min.js      ColorThief library (dynamic accent color extraction)
 │   ├── theme.js               Dark mode (View Transition API), header, mobile menu, scroll observer
 │   ├── featured-carousel.js   Horizontal carousel pause/play on hover/touch
-│   ├── artists-list.js        Intersection Observer staggered entrance for artist grid
+│   ├── artists-list.js        Placeholder — card fade-up handled by animations.css
 │   ├── artist-content.js      Sticky scroll card peel, ambient audio, artwork modal, ColorThief
 │   └── artwork-content.js     Image zoom, entrance animations, inquiry mailto
 ├── config/
-│   ├── settings_schema.json   Theme customizer schema
+│   ├── settings_schema.json   Theme customizer schema (currently empty — all content via metaobjects)
 │   └── settings_data.json     Default setting values
 ├── layout/
 │   └── theme.liquid           Root layout: fonts, CSS vars, noise overlay, scripts
@@ -34,7 +32,9 @@ webDev-liquid/
 │   ├── artist-hero.liquid     Sticky 400vh scroll, card peel stack, signature, audio
 │   ├── artist-bio.liquid      Portrait (sticky), origin/focus metadata, bio HTML
 │   ├── artist-artworks-grid.liquid  Masonry columns grid with modal trigger
-│   └── artwork-detail.liquid  Split layout: image zoom left, details right
+│   ├── artist-meet.liquid     Parallax "Meet {name}" text divider
+│   ├── artwork-detail.liquid  Split layout: image zoom left, details right
+│   └── main-page.liquid       Generic page content renderer (privacy, terms, etc.)
 ├── snippets/
 │   ├── dark-mode-toggle.liquid  Sun/moon icon with View Transition API
 │   ├── artist-card.liquid       Artist card for listing page
@@ -45,8 +45,9 @@ webDev-liquid/
 │   └── meta-tags.liquid         OpenGraph and Twitter card meta tags
 └── templates/
     ├── index.json               Home page
+    ├── page.json                Generic page (uses main-page.liquid)
     ├── page.artists.json        Artists listing at /pages/artists
-    ├── metaobject.artist.json   Artist detail at /artist/{handle}
+    ├── metaobject/artist.json   Artist detail at /artist/{handle}
     └── product.artwork.json     Artwork detail — product page variant
 ```
 
@@ -70,7 +71,7 @@ This theme reads all content from Shopify. No external CMS or database.
 | `audio_track`           | file                          | Ambient audio on artist page |
 | `sticky_scroll`         | list.metaobject (→ products) | Hero card stack              |
 
-Artist pages resolve at `/artist/{handle}` via the `metaobject.artist.json` template. The URL template must be set to `/artist/{handle}` in Shopify Admin under Content > Metaobjects > Artist > Edit definition.
+Artist pages resolve at `/artist/{handle}` via the `metaobject/artist.json` template. The URL template must be set to `/artist/{handle}` in Shopify Admin under Content > Metaobjects > Artist > Edit definition.
 
 ### Metaobject: `site_settings` (handle: `artist-studio-by-pristine-forests`)
 

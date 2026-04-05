@@ -48,7 +48,7 @@ function initInquiryButton() {
             const subject = encodeURIComponent(`Inquiry for Artwork: ${btn.dataset.title}`);
             const body = encodeURIComponent(`Hi Pristine Forests Team,\n\nI am interested in the artwork "${btn.dataset.title}" by ${btn.dataset.artist}.\n\nPlease let me know if this piece is available and the shipping details.`);
             
-            window.location.href = `mailto:hello@pristineforests.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:pankaj.saroj@hotmail.com?subject=${subject}&body=${body}`;
         });
     });
 }

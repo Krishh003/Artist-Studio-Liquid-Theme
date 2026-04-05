@@ -1,6 +1,6 @@
 # Developer Handover — Pristine Forests Liquid Theme
 
-**Date:** 2026-04-01
+**Date:** 2026-04-05
 **Source repo:** `webDev-Shopify` (Next.js 16 headless)
 **This repo:** `webDev-liquid` (Shopify OS2 Liquid theme)
 **GitHub:** https://github.com/Krishh003/Artist-Studio-Liquid-Theme
@@ -21,7 +21,11 @@ A complete port of the Pristine Forests Artist Studio from a headless Next.js si
 |---|---|---|
 | Theme structure | Complete | All required Shopify directories present |
 | `layout/theme.liquid` | Complete | Fonts, noise overlay, dark mode init script, conditional JS loading |
-| `templates/*.json` | Complete | index, page.artists, metaobject.artist, product.artwork |
+| `templates/index.json` | Complete | Home page |
+| `templates/page.json` | Complete | Generic page (privacy, terms, etc.) — uses main-page.liquid |
+| `templates/page.artists.json` | Complete | Artists listing at /pages/artists |
+| `templates/metaobject/artist.json` | Complete | Artist detail at /artist/{handle} — Shopify auto-generated format |
+| `templates/product.artwork.json` | Complete | Artwork product page |
 | `config/settings_schema.json` | Empty | Shopify cleared it — safe to leave empty or rebuild if customizer is needed |
 | `locales/en.default.json` | Complete | All strings including accessibility keys |
 | `sections/header.liquid` | Complete | Fixed nav, desktop + mobile, dark mode toggle, mobile menu via JS |
@@ -33,7 +37,9 @@ A complete port of the Pristine Forests Artist Studio from a headless Next.js si
 | `sections/artist-hero.liquid` | Complete | 400vh sticky container, card peel stack, signature BG, audio element, modal shell |
 | `sections/artist-bio.liquid` | Complete | Portrait, origin/focus metadata, bio text |
 | `sections/artist-artworks-grid.liquid` | Complete | Masonry columns, modal trigger per card |
+| `sections/artist-meet.liquid` | Complete | Parallax "Meet {name}" text divider between artworks grid and bio |
 | `sections/artwork-detail.liquid` | Complete | Split layout, Year/Medium/Dimensions from metafields, inquiry mailto |
+| `sections/main-page.liquid` | Complete | Generic page title + content renderer; used by page.json template |
 | `snippets/dark-mode-toggle.liquid` | Complete | Material Icons sun/moon, View Transition API via theme.js |
 | `snippets/artist-card.liquid` | Complete | Full 500px card, grayscale hover, correct URL via system.url |
 | `snippets/artwork-card.liquid` | Complete | data-* attributes for modal, image + title + price |
@@ -44,7 +50,7 @@ A complete port of the Pristine Forests Artist Studio from a headless Next.js si
 | `assets/animations.css` | Complete | @keyframes: carousel, bounce, pulse, fade-in-up, scale-in |
 | `assets/theme.js` | Complete | Dark mode + View Transition, header scroll, mobile menu, intersection observer |
 | `assets/featured-carousel.js` | Complete | Pause/resume on mouse/touch |
-| `assets/artists-list.js` | Complete | Staggered entrance via Intersection Observer |
+| `assets/artists-list.js` | Placeholder | Card fade-up handled by CSS @keyframes in animations.css; file kept for future artist-listing-specific JS |
 | `assets/artist-content.js` | Complete | Sticky scroll card peel, signature reveal, ambient audio, modal, ColorThief, parallax |
 | `assets/artwork-content.js` | Complete | Image zoom (cursor-guided), entrance animations, inquiry mailto |
 | `assets/colorthief.min.js` | Complete | Minified ColorThief library |
