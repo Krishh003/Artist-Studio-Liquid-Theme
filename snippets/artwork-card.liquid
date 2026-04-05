@@ -9,7 +9,7 @@
      data-artwork-id="{{ product.id }}"
      data-image="{{ product.featured_image | image_url: width: 1200 }}"
      data-title="{{ product.title | escape }}"
-     data-price="{{ product.price | money }}"
+     data-artist="{{ artist.name.value | default: product.vendor | escape }}"
      data-description="{{ product.description | strip_html | truncatewords: 50 | escape }}"
      data-url="{{ product.url }}"
      style="break-inside: avoid; border-radius: 2rem; overflow: hidden;

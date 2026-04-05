@@ -129,8 +129,10 @@ function initArtworkModal() {
 
     function openModal(data) {
         document.getElementById('modal-title').textContent = data.title || '';
-        document.getElementById('modal-price').textContent = data.price || '';
-        document.getElementById('modal-desc').textContent = data.description || '';
+        const artistEl = document.getElementById('modal-artist-name');
+        if (artistEl) artistEl.textContent = data.artist || '';
+        document.getElementById('modal-desc').textContent =
+            data.description || 'No description provided for this specific piece.';
 
         if (imgEl) {
             imgEl.src = data.image || '';
@@ -190,7 +192,7 @@ function initArtworkModal() {
         e.preventDefault();
         openModal({
             title: d.title,
-            price: d.price,
+            artist: d.artist,
             description: d.description,
             image: d.image,
             url: d.url

@@ -35,7 +35,7 @@
     <!-- CSS columns masonry -->
     <div class="artworks-masonry">
       {% for product in artworks limit: 50 %}
-        {% render 'artwork-card', product: product, index: forloop.index0 %}
+        {% render 'artwork-card', product: product, index: forloop.index0, artist: artist %}
       {% else %}
         <p style="text-align: center; padding: 6rem 0; color: rgba(0,0,0,0.2);
                   font-family: var(--font-serif); font-size: 1.5rem; font-style: italic;">
