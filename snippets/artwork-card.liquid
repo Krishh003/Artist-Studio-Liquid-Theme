@@ -4,15 +4,14 @@
     - index:   Card index (0-based) for staggered entrance delay
 {% endcomment %}
 
-<a href="{{ product.url }}"
-   class="artwork-card artwork-thumb group"
+<div class="artwork-card artwork-thumb group"
      data-index="{{ index | default: 0 }}"
      data-artwork-id="{{ product.id }}"
      data-image="{{ product.featured_image | image_url: width: 1200 }}"
      data-title="{{ product.title | escape }}"
-     data-artist="{{ product.vendor | escape }}"
+     data-price="{{ product.price | money }}"
      data-description="{{ product.description | strip_html | truncatewords: 50 | escape }}"
-     data-url="{{ product.url | escape }}"
+     data-url="{{ product.url }}"
      style="break-inside: avoid; border-radius: 2rem; overflow: hidden;
             border: 1px solid rgba(0,0,0,0.05); cursor: pointer; position: relative;
             margin-bottom: 2rem; display: block;
@@ -32,7 +31,6 @@
   <div class="card-hover-overlay"
        style="position: absolute; inset: 0;
               background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
-              opacity: 0;
               transition: opacity 0.5s ease;
               display: flex; flex-direction: column;
               justify-content: flex-end; padding: 2rem;">
@@ -46,4 +44,4 @@
       Explore Subject
     </p>
   </div>
-</a>
+</div>
