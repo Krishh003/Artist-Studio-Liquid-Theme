@@ -120,7 +120,11 @@ function initArtworkModal() {
     const modal = document.getElementById('artwork-modal');
     const closeBtn = document.getElementById('modal-close');
     const imgEl = document.getElementById('modal-image');
+    const titleEl = document.getElementById('modal-title');
+    const artistEl = document.getElementById('modal-artist');
+    const descEl = document.getElementById('modal-desc');
     if (!modal) return;
+    const detailLink = modal.querySelector('[data-artwork-link]');
 
     let colorThief = null;
     if (typeof ColorThief !== 'undefined') {
@@ -128,13 +132,19 @@ function initArtworkModal() {
     }
 
     function openModal(data) {
-        document.getElementById('modal-title').textContent = data.title || '';
-        document.getElementById('modal-price').textContent = data.price || '';
-        document.getElementById('modal-desc').textContent = data.description || '';
+        if (titleEl) titleEl.textContent = data.title || '';
+        if (artistEl) artistEl.textContent = data.artist || '';
+        if (descEl) descEl.textContent = data.description || 'No description provided for this specific piece.';
 
         if (imgEl) {
             imgEl.src = data.image || '';
             imgEl.alt = data.title || '';
+        }
+
+        if (detailLink) {
+            detailLink.setAttribute('href', data.url || '#');
+            detailLink.style.boxShadow = '';
+            detailLink.style.backgroundColor = '#ffffff';
         }
 
         modal.classList.remove('hidden');
@@ -187,10 +197,11 @@ function initArtworkModal() {
         if (!card) return;
         const d = card.dataset;
         if (!d.image && !d.title) return; // not a populated card
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
         e.preventDefault();
         openModal({
             title: d.title,
-            price: d.price,
+            artist: d.artist,
             description: d.description,
             image: d.image,
             url: d.url
@@ -226,6 +237,10 @@ function applyDynamicColor(img, colorThief) {
         const modal = document.getElementById('artwork-modal');
         modal.querySelectorAll('.dynamic-accent').forEach(el => { el.style.color = hex; });
         modal.querySelectorAll('.dynamic-accent-bg').forEach(el => { el.style.backgroundColor = hex; });
+        const detailLink = modal.querySelector('[data-artwork-link]');
+        if (detailLink) {
+            detailLink.style.boxShadow = `0 10px 30px -10px ${hex}55`;
+        }
     } catch (e) {
         // Silent fallback — gold stays
     }

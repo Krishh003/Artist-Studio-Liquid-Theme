@@ -1,5 +1,5 @@
 {%- liquid
-  assign artist_handle = product.metafields.custom.artist | metafield_tag | default: product.vendor
+  assign artist_handle = product.metafields.custom.artist_handle.value | default: product.vendor | handleize
   assign artwork_medium = product.metafields.custom.medium.value | default: 'Digital Mixed Media'
   assign artwork_dimensions = product.metafields.custom.dimensions.value | default: 'Dimensions on Request'
   assign date_created = product.metafields.custom.date_created.value
@@ -14,7 +14,7 @@
        style="opacity:0; transform: translateX(-50px);">
 
     <!-- Back to Gallery -->
-    <a href="/artist/{{ product.metafields.custom.artist_handle.value | default: product.vendor | handleize }}"
+    <a href="/artist/{{ artist_handle }}"
        class="absolute top-6 left-6 z-50 flex items-center gap-2 text-slate-500 dark:text-text-muted hover:text-primary transition-colors">
       <span class="material-icons text-sm">arrow_back</span>
       <span class="text-xs font-bold tracking-widest uppercase">Back to Gallery</span>
@@ -37,7 +37,7 @@
     <div class="max-w-xl">
 
       <!-- Artist link -->
-      <a href="/artist/{{ product.metafields.custom.artist_handle.value | default: product.vendor | handleize }}"
+      <a href="/artist/{{ artist_handle }}"
          class="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 block hover:underline">
         {{ product.vendor }}
       </a>
@@ -72,8 +72,8 @@
         {% endif %}
       </div>
 
-      <!-- Price + Inquire -->
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <!-- Inquiry -->
+      <div class="w-full mt-4">
         <div>
           <span class="block text-xs uppercase tracking-wider opacity-60 mb-1">Price</span>
           <span class="font-serif text-3xl text-slate-900 dark:text-white">
@@ -85,7 +85,7 @@
           </span>
         </div>
         <a href="mailto:pankaj.saroj@hotmail.com?subject={{ 'Inquiry: ' | append: product.title | append: ' by ' | append: product.vendor | url_encode }}"
-           class="w-full sm:w-auto flex-1 bg-slate-900 dark:bg-white text-white dark:text-background-dark py-4 px-6 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-primary hover:text-white transition-all duration-300 text-center">
+           class="block w-full bg-slate-900 dark:bg-white text-white dark:text-background-dark py-4 px-6 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-primary hover:text-white transition-all duration-300 text-center">
           Inquire About Artwork
         </a>
       </div>
