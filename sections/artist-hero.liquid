@@ -15,7 +15,7 @@
          src="{{ artist.audio_track.value }}"
          loop
          preload="none"></audio>
-{% elsif artist.handle == 'elena' %}
+{% elsif artist.system.handle == 'elena' %}
   <audio id="artist-audio"
          src="{{ 'elena-piano.mp3' | asset_url }}"
          loop
@@ -23,7 +23,7 @@
 {% endif %}
 
 <!-- Audio Toggle (fixed) -->
-{% if artist.audio_track != blank or artist.handle == 'elena' %}
+{% if artist.audio_track != blank or artist.system.handle == 'elena' %}
   <div class="fixed bottom-8 right-8" style="z-index: 100;">
     <button id="audio-play-toggle"
             aria-label="Toggle ambient audio"

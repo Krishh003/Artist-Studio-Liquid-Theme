@@ -7,7 +7,7 @@
 
 {%- liquid
   assign artist = metaobject
-  assign artist_handle = artist.handle
+  assign artist_handle = artist.system.handle
   assign artworks = collections[artist_handle].products
   if artworks == blank or artworks.size == 0
     comment
@@ -31,13 +31,6 @@
         Selected Works
       </h3>
     </div>
-
-    <!-- DEBUG: remove before deploy -->
-    <p style="font-family:monospace;font-size:0.75rem;color:#f00;padding:1rem 0;">
-      artist_handle={{ artist_handle }} |
-      collection={{ collections[artist_handle].title | default: 'NOT FOUND' }} |
-      artworks.size={{ artworks.size }}
-    </p>
 
     <!-- CSS columns masonry -->
     <div class="artworks-masonry">
