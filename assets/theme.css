@@ -642,6 +642,13 @@ body {
 @media (min-width: 1024px) { .artworks-masonry { columns: 3; } }
 
 /* Artwork card hover effects */
+.card-hover-overlay {
+  opacity: 0;
+}
+.card-hover-overlay p,
+.card-hover-overlay h3 {
+  transform: translateY(1rem);
+}
 .artwork-card:hover {
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
 }
