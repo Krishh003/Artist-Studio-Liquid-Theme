@@ -55,11 +55,12 @@
   <!-- Signature background -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none px-12"
        style="z-index: 1;">
-    {% if artist.handle == 'pankaj-saroj' %}
+    {% if artist.signature_image != blank %}
       <img id="artist-signature"
-           src="{{ 'pankaj-sign.png' | asset_url }}"
-           alt="Pankaj Saroj signature"
-           width="2000" height="600"
+           src="{{ artist.signature_image.value | image_url: width: 2000 }}"
+           alt="{{ artist.name.value | escape }} signature"
+           width="{{ artist.signature_image.value.width | default: 2000 }}"
+           height="{{ artist.signature_image.value.height | default: 600 }}"
            class="signature-reveal dark:invert select-none"
            style="width: min(150vw, 2000px); max-width: 2000px; height: auto;
                   mix-blend-mode: darken; transform: rotate(-10deg) scale(0.95);">

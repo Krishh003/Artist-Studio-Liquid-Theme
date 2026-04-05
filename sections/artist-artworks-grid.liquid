@@ -10,7 +10,13 @@
   assign artist_handle = artist.handle
   assign artworks = collections[artist_handle].products
   if artworks == blank or artworks.size == 0
-    assign artworks = collections.all.products | where: 'vendor', artist.name.value
+    comment
+      Fallback: filter all products by tag. Slower than an automated collection.
+      Create a per-artist automated collection (handle = artist handle, condition:
+      "Product tag equals artist:{handle}") to use the faster primary path above.
+    endcomment
+    assign tag_filter = 'artist:' | append: artist_handle
+    assign artworks = collections.all.products | where: 'tags', tag_filter
   endif
 -%}
 
