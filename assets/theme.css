@@ -607,6 +607,7 @@ body {
 /* Generated Dark Mode Utilities mapped from HTML dark: classes */
 .dark .dark\:bg-\[\#1B3B36\] { background-color: #1B3B36; }
 .dark .dark\:bg-\[\#E5E4D7\] { background-color: #E5E4D7; }
+.dark .dark\:bg-black { background-color: #000000; }
 .dark .dark\:bg-background-accent { background-color: var(--background-accent); }
 .dark .dark\:bg-background-dark { background-color: var(--background-dark); }
 .dark .dark\:bg-background-dark\/90 { background-color: rgba(14, 18, 14, 0.9); }
@@ -619,6 +620,7 @@ body {
 
 .dark .dark\:mix-blend-screen { mix-blend-mode: screen; }
 .dark .dark\:opacity-\[0\.05\] { opacity: 0.05; }
+.dark .dark\:invert { filter: invert(1); }
 
 .dark .dark\:text-\[\#1B3B36\] { color: #1B3B36; }
 .dark .dark\:text-\[\#E5E4D7\] { color: #E5E4D7; }
@@ -656,4 +658,3 @@ body {
 .dark .artwork-card {
   border-color: rgba(255,255,255,0.05);
 }
-

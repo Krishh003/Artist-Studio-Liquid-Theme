@@ -32,6 +32,13 @@
       </h3>
     </div>
 
+    <!-- DEBUG: remove before deploy -->
+    <p style="font-family:monospace;font-size:0.75rem;color:#f00;padding:1rem 0;">
+      artist_handle={{ artist_handle }} |
+      collection={{ collections[artist_handle].title | default: 'NOT FOUND' }} |
+      artworks.size={{ artworks.size }}
+    </p>
+
     <!-- CSS columns masonry -->
     <div class="artworks-masonry">
       {% for product in artworks limit: 50 %}
